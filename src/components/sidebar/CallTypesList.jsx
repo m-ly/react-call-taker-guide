@@ -8,7 +8,7 @@ function CallTypesList({ callTypes, onSelect }) {
       <SearchForm />
       <ul>
         {headings.map((type) => (
-          <li key={type} onClick={() => onSelect(callTypes[type])}>
+          <li key={type} onClick={() => onSelect(callTypes, type)}>
             {type}
           </li>
         ))}
