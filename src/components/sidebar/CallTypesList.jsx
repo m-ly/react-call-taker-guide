@@ -1,13 +1,21 @@
+import { useState } from "react";
 import SearchForm from "./SeachForm";
 
 function CallTypesList({ callTypes, onSelect }) {
-  const headings = Object.keys(callTypes);
+  const [searchValue, setSearchValue] = useState("");
+  const allCalltypes = Object.keys(callTypes);
+
+  const filteredCallTypes = !searchValue
+    ? allCalltypes
+    : allCalltypes.filter((callType) =>
+        callType.toLowerCase().includes(searchValue.toLowerCase().trim())
+      );
 
   return (
     <div className="sidebar">
-      <SearchForm />
+      <SearchForm searchValue={searchValue} setSearchValue={setSearchValue} />
       <ul>
-        {headings.map((type) => (
+        {filteredCallTypes.map((type) => (
           <li key={type} onClick={() => onSelect(callTypes, type)}>
             {type}
           </li>

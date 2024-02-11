@@ -1,9 +1,9 @@
 import { useState } from "react";
-
 import CallTypesList from "./components/sidebar/CallTypesList";
 import Banner from "./components/Banner";
 import DynamicForm from "./components/CallTypeForm";
-import CallGuideForm from "./components/Questions";
+import * as helpers from "./helpers/helpers";
+
 import "./App.css";
 
 const exampleCallTypes = {
@@ -19,43 +19,29 @@ const exampleCallTypes = {
 function App() {
   const [callTypes, setCallTypes] = useState(exampleCallTypes);
   const [questions, setQuestions] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState("");
 
-  const handleSetCallType = (callType, questions) => {
+  function handleSetCallType(callType, questions) {
     setCallTypes({ ...callTypes, [callType]: questions });
-  };
+  }
 
-  function handleSelection(callTypes, type) {
-    const callQuestions = callTypes[type];
-    const generalQuestions = [
-      "What is the address?",
-      "What are you reporting?",
-      "When did this happen",
-    ];
-
-    const endingQuestions = ["Caller Info", "Do you want contact?"];
-
-    const questions = [
-      ...generalQuestions,
-      ...callQuestions,
-      ...endingQuestions,
-    ];
-
+  function handleCallSelection(callTypes, type) {
+    const questions = helpers.buildQuestionList(callTypes, type);
     setQuestions(questions);
+    setForm("questions");
   }
 
   return (
     <div className="app">
-      <Banner setShowForm={setShowForm} onSetCallType={handleSetCallType} />
+      <Banner setForm={setForm} onSetCallType={handleSetCallType} />
+      <CallTypesList callTypes={callTypes} onSelect={handleCallSelection} />
 
-      <CallTypesList callTypes={callTypes} onSelect={handleSelection} />
-
-      {questions && <CallGuideForm questions={questions} />}
-
-      {showForm && (
+      {form && (
         <DynamicForm
-          onSelect={handleSelection}
           onSetCallType={handleSetCallType}
+          questions={questions}
+          setForm={setForm}
+          form={form}
         />
       )}
     </div>

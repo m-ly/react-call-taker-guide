@@ -1,6 +1,12 @@
 import { useState } from "react";
+import CallGuideForm from "./Questions";
 
-function CallTypeForm({ setCallType, callType, submitCallType }) {
+function CallTypeForm({ setCallType, callType, setForm }) {
+  function handleClick(e) {
+    e.preventDefault();
+    setForm("addQuestionForm");
+  }
+
   return (
     <form className="dynamic">
       <input
@@ -10,12 +16,12 @@ function CallTypeForm({ setCallType, callType, submitCallType }) {
         onChange={(event) => setCallType(event.target.value)}
       />
 
-      <button onClick={submitCallType}>New</button>
+      <button onClick={handleClick}>New</button>
     </form>
   );
 }
 
-function QuestionForm({ callType, onSetCallType, setAddQuestionForm }) {
+function QuestionForm({ callType, onSetCallType, setForm }) {
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState("");
   function handleAddQuestion(event) {
@@ -28,7 +34,7 @@ function QuestionForm({ callType, onSetCallType, setAddQuestionForm }) {
   function handleSubmit(e) {
     e.preventDefault();
     onSetCallType(callType, questions);
-    setAddQuestionForm(false);
+    setForm("");
   }
   return (
     <form className="dynamic" onSubmit={(e) => handleSubmit(e)}>
@@ -56,36 +62,34 @@ function QuestionForm({ callType, onSetCallType, setAddQuestionForm }) {
   );
 }
 
-function DynamicForm({ onSetCallType }) {
+function DynamicForm({ onSetCallType, questions, form, setForm }) {
   const [callType, setCallType] = useState("");
-  const [showCallTypeForm, setShowCallTypeForm] = useState(true);
-  const [addQuestionForm, setAddQuestionForm] = useState(false);
 
   function submitCallType(event) {
     event.preventDefault();
-
-    console.log(callType);
-    setShowCallTypeForm(false);
-    setAddQuestionForm(true);
   }
 
   return (
     <>
-      {showCallTypeForm && (
+      {form === "addCallForm" && (
         <CallTypeForm
           setCallType={setCallType}
           callType={callType}
           submitCallType={submitCallType}
+          setForm={setForm}
         />
       )}
 
-      {addQuestionForm && (
+      {form === "addQuestionForm" && (
         <QuestionForm
           callType={callType}
           onSetCallType={onSetCallType}
-          setAddQuestionForm={setAddQuestionForm}
+          setAddQuestionForm={""}
+          setForm={setForm}
         />
       )}
+
+      {form === "questions" && <CallGuideForm questions={questions} />}
     </>
   );
 }

@@ -1,9 +1,8 @@
-import { useState } from "react";
 import road from "../assets/road-3.png";
 
-function Banner({ setShowForm }) {
+function Banner({ setForm }) {
   function handleSetCallButton() {
-    setShowForm(true);
+    setForm("addCallForm");
   }
   return (
     <header>
