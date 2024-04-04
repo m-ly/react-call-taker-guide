@@ -1,0 +1,65 @@
+import supabase from "./supabase";
+
+export async function getCallTypes() {
+  const { data, error } = await supabase
+    .from("call_types")
+    .select(`*, questions (id, question), keywords(id, keyword)`);
+
+  if (error) {
+    console.error(error);
+    throw new Error("call_types could not be loaded");
+  }
+
+  const formattedData = {};
+
+  data.forEach((element) => {
+    const callType = element.name;
+
+    const questions = element.questions.map((ele) => ele.question);
+    const keywords = element.keywords.map((ele) => ele.keyword);
+
+    formattedData[callType] = {
+      questions: questions,
+      keywords: keywords,
+      id: element.id,
+    };
+  });
+
+  return formattedData;
+}
+
+export async function deleteCallType(id) {
+  const { data, error } = await supabase
+    .from("call_types")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("CallType could not be deleted");
+  }
+
+  return data;
+}
+
+export async function createNewGuide(callType, questions, keywords) {
+  console.log("calling createNewGuide");
+  const { data: typeName, error } = await supabase
+    .from("call_types")
+    .insert({ name: callType })
+    .select();
+
+  const fkey = typeName ? typeName[0].id : null;
+
+  for (const question of questions) {
+    const { data, error } = await supabase
+      .from("questions")
+      .insert({ call_type_id: fkey, question });
+  }
+
+  for (const keyword of keywords) {
+    const { data, error } = await supabase
+      .from("keywords")
+      .insert({ call_type_id: fkey, keyword });
+  }
+}

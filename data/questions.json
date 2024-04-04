@@ -1,0 +1,27 @@
+{
+  "data": {
+    "callTypes": {
+      "SUBBOT": {
+        "questions": [
+          "What is the description of the person?",
+          "What is he doing?"
+        ],
+        "keywords": [
+          "bothering",
+          "camping",
+          "panhandling",
+          "homeless",
+          "transient"
+        ]
+      },
+      "PARTY": {
+        "questions": [
+          "Do you know the exact address the noise is coming from?",
+          "About how many people are there",
+          "Did the caller provide any additional information"
+        ],
+        "keywords": ["loud", "music", "party", "noise", "noisy"]
+      }
+    }
+  }
+}
