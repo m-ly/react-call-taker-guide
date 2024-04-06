@@ -22,7 +22,7 @@ export default function Login() {
   );
 
   return (
-    <main className="">
+    <main className="logInForm">
       <form className="" onSubmit={handleLogin}>
         <div className="">
           <label htmlFor="email">Email address</label>

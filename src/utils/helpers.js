@@ -1,14 +1,11 @@
 export function findMatchingCallTypes(data, inputString) {
-  const result = [];
-  for (const callTypeKey in data) {
-    const keywords = data[callTypeKey].keywords;
-    for (const keyword of keywords) {
-      if (inputString.toLowerCase().includes(keyword.toLowerCase())) {
-        result.push(callTypeKey);
-        break;
-      }
-    }
-  }
+  const types = data.map((callType) =>
+    callType.keywords.map((keyword) => {
+      if (keyword.keyword.toLowerCase().includes(inputString.toLowerCase()))
+        return callType.name;
+    })
+  );
 
-  return result;
+  //should probably refactor this to a reducer for readability
+  return [...new Set(types.flat().filter((ele) => ele))];
 }

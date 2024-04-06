@@ -17,6 +17,7 @@ export default function AppLayout() {
   });
 
   if (isLoading) return <h1>Loading</h1>;
+  if (error) return console.error(error);
 
   return (
     <main>

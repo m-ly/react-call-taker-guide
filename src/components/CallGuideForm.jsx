@@ -9,6 +9,7 @@ function IntroductoryQuestions({ callTypes }) {
 
   async function handleTypeChange(e) {
     const input = e.target.value;
+
     const filteredCallTypes = findMatchingCallTypes(callTypes, input);
     await handleFilterCallTypes(filteredCallTypes);
   }
@@ -37,6 +38,9 @@ function IntroductoryQuestions({ callTypes }) {
 function CallGuideForm({ callTypes }) {
   //const { callTypes, activeCallType } = useAppContext();
   const { activeCallType } = useAppContext();
+  const currentTypeData = Object.values(callTypes).find(
+    (ele) => ele.name === activeCallType
+  );
 
   // concatenates all answers and copies to keyboard
   const handleSubmit = async (e) => {
@@ -68,8 +72,12 @@ function CallGuideForm({ callTypes }) {
         <IntroductoryQuestions callTypes={callTypes} />
         {activeCallType && (
           <>
-            {callTypes[activeCallType].questions.map((question, index) => (
-              <Question key={question} question={question} index={index} />
+            {currentTypeData.questions.map((question, index) => (
+              <Question
+                key={`${currentTypeData.name}-${index}`}
+                question={question.question}
+                index={index}
+              />
             ))}
             <button type="submit">Submit</button>
           </>

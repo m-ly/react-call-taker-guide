@@ -1,30 +1,40 @@
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import { useState } from "react";
-import { createNewGuide } from "../services/apiCallTypes";
+import { createNewGuide } from "../../services/apiCallTypes";
 import CallTypeForm from "./CallTypeForm";
 import QuestionsForm from "./QuestionsForm";
 import KeywordsForm from "./KeywordForm";
-import { Navigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export default function AddCallTypeForm() {
-  const { callTypes, currentForm, handleSetForm } = useAppContext();
+export default function AddCallTypeForm({ setShowForm }) {
+  const { currentForm, handleSetForm } = useAppContext();
   const [questions, setQuestions] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [callType, setCallType] = useState("");
+  const queryClient = useQueryClient();
 
-  function handleSubmit(e) {
+  const { isLoading, mutate } = useMutation({
+    mutationFn: createNewGuide,
+    onSuccess: () => {
+      toast.success(`New call type ${callType} successfully added!`);
+      queryClient.invalidateQueries({ queryKey: ["calltype"] });
+    },
+    onError: (err) => toast.error(err.message),
+  });
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    const updatedCallTypes = {
-      ...callTypes,
-      [callType]: { questions: questions, keywords: keywords },
-    };
-    console.log("handleSubmit");
-    console.log({ [callType]: { questions: questions, keywords: keywords } });
+    try {
+      const data = { name: callType, questions: questions, keywords: keywords };
+      mutate(data);
+      //await createNewGuide(callType, questions, keywords);
 
-    createNewGuide(callType, questions, keywords);
-    <Navigate to="/admin" replace={true} />;
-    //handleCreateGuide(updatedCallTypes);
+      setShowForm(false);
+    } catch {
+      throw new Error("Replace me! This is a test error notification");
+    }
   }
 
   return (

@@ -25,7 +25,7 @@ export async function getCallTypes() {
     };
   });
 
-  return formattedData;
+  return data;
 }
 
 export async function deleteCallType(id) {
@@ -35,31 +35,38 @@ export async function deleteCallType(id) {
     .eq("id", id);
 
   if (error) {
-    console.error(error);
     throw new Error("CallType could not be deleted");
   }
 
   return data;
 }
 
-export async function createNewGuide(callType, questions, keywords) {
-  console.log("calling createNewGuide");
+export async function createNewGuide(callType) {
   const { data: typeName, error } = await supabase
     .from("call_types")
-    .insert({ name: callType })
+    .insert({ name: callType.name })
     .select();
 
   const fkey = typeName ? typeName[0].id : null;
 
-  for (const question of questions) {
+  for (const question of callType.questions) {
     const { data, error } = await supabase
       .from("questions")
       .insert({ call_type_id: fkey, question });
   }
 
-  for (const keyword of keywords) {
+  for (const keyword of callType.keywords) {
     const { data, error } = await supabase
       .from("keywords")
       .insert({ call_type_id: fkey, keyword });
   }
+}
+
+export async function updateQuestion(question, id) {
+  const { error } = await supabase
+    .from("questions")
+    .update({ question: question })
+    .eq("id", id);
+
+  if (error) console.log(error);
 }

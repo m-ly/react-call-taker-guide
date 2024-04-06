@@ -7,13 +7,24 @@ function Header() {
 
   return (
     <header>
-      <span>
-        <h1 className="">GuardRails</h1>
+      <div className="logo">
+        <h1>GuardRails</h1>
         <img src={road} alt="road" className="" width="40px" />
-      </span>
-      <span>
-        {isAuthenticated && <Link to="/admin">Admin</Link>}
-        <Link to="/login">Log In</Link>
+      </div>
+      <span className="headerNav">
+        {isAuthenticated ? (
+          <Link className="link" to="/admin">
+            Admin
+          </Link>
+        ) : (
+          <Link className="link" to="/login">
+            Log In
+          </Link>
+        )}
+
+        <Link className="link" to="/">
+          Home
+        </Link>
       </span>
     </header>
   );

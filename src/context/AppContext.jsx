@@ -46,24 +46,6 @@ function AppProvider({ children }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  // useEffect(function () {
-  //   const fetchData = async function () {
-  //     dispatch({ type: "loading" });
-  //     const data = await getCallTypes();
-
-  //     try {
-  //       dispatch({
-  //         type: "dataReceived",
-  //         payload: data,
-  //       });
-  //     } catch {
-  //       dispatch({ type: "dataFailed" });
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   const handleFilterCallTypes = (callArray) =>
     dispatch({ type: "filterTypes", payload: callArray });
 
@@ -72,7 +54,6 @@ function AppProvider({ children }) {
   };
 
   const handleSetForm = (formName) => {
-    console.log("clicked", "formname ", formName);
     dispatch({ type: "setForm", payload: formName });
   };
 
