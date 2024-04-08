@@ -6,7 +6,7 @@ import Container from "./Container";
 import CallGuideForm from "./CallGuideForm";
 import Header from "./Header";
 
-export default function AppLayout() {
+export default function AppLayout({ children }) {
   const {
     isLoading,
     data: callTypes,
@@ -21,9 +21,12 @@ export default function AppLayout() {
 
   return (
     <main>
-      <Header /> <SideBar callTypes={callTypes} />
+      <Header />
+      <SideBar callTypes={callTypes} />
+
       <Container>
         <CallGuideForm callTypes={callTypes} />
+        {children}
       </Container>
     </main>
   );

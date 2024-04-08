@@ -1,8 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
 
 const USER = {
-  name: "Jack",
-  email: "jack@example.com",
+  name: "joe@rpd.com",
+  email: "Secretp@assword123",
   password: "qwerty",
   isAdmin: true,
 };

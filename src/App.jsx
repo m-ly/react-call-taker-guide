@@ -8,7 +8,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Admin from "./pages/Admin.jsx";
+import CallGuideForm from "./components/CallGuideForm.jsx";
 import { Toaster } from "react-hot-toast";
+import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +30,14 @@ function App() {
             <Routes>
               <Route path="/" element={<AppLayout />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/admin/*" element={<Admin />} />
+              <Route
+                path="/admin/*"
+                element={
+                  <ProtectedRoutes>
+                    <Admin />
+                  </ProtectedRoutes>
+                }
+              />
             </Routes>
           </Router>
         </AuthProvider>

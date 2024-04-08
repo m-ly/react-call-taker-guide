@@ -1,25 +1,17 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
+import { useLogin } from "../features/authentication/useLogin";
 
 export default function Login() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("jack@example.com");
-  const [password, setPassword] = useState("qwerty");
-  const { login, isAuthenticated } = useAuth();
+  const [email, setEmail] = useState("joe@rpd.com");
+  const [password, setPassword] = useState("SecretP@ssword123");
+  const { isLoading, login } = useLogin();
 
   function handleLogin(e) {
     e.preventDefault();
+    if (!email || !password) return;
 
-    if (email && password) login(email, password);
+    login({ email, password });
   }
-
-  useEffect(
-    function () {
-      if (isAuthenticated) navigate("/", { replace: true });
-    },
-    [isAuthenticated, navigate]
-  );
 
   return (
     <main className="logInForm">
@@ -31,6 +23,7 @@ export default function Login() {
             id="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            disabled={isLoading}
           />
         </div>
 
@@ -41,6 +34,7 @@ export default function Login() {
             id="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            disabled={isLoading}
           />
         </div>
 

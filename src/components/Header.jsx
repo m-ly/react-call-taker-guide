@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import road from "../assets/road-3.png";
-import { useAuth } from "../context/AuthContext";
+import { useUser } from "../features/authentication/useUser";
+import { useLogout } from "../features/authentication/useLogout";
 
 function Header() {
-  const { isAuthenticated } = useAuth();
+  const userData = useUser();
+  const { logOut, isLoading } = useLogout();
+  console.log(userData);
 
   return (
     <header>
@@ -12,10 +15,15 @@ function Header() {
         <img src={road} alt="road" className="" width="40px" />
       </div>
       <span className="headerNav">
-        {isAuthenticated ? (
-          <Link className="link" to="/admin">
-            Admin
-          </Link>
+        {userData.user ? (
+          <>
+            <Link className="link" to="/admin">
+              Admin
+            </Link>
+            <button className="link" onClick={logOut}>
+              Logout
+            </button>
+          </>
         ) : (
           <Link className="link" to="/login">
             Log In
