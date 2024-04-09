@@ -131,6 +131,15 @@ td {
   padding: 5px;
 }
 
+.headerNav button {
+  width: 52px;
+  size: 15px;
+  border: none;
+  text-decoration: underline;
+  background-color: #1f2937;
+  color: var(--color-brand--1);
+}
+
 .modalContainer {
   position: fixed;
   top: 0;

@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Admin from "./pages/Admin.jsx";
-import CallGuideForm from "./components/CallGuideForm.jsx";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 

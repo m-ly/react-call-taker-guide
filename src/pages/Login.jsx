@@ -4,7 +4,7 @@ import { useLogin } from "../features/authentication/useLogin";
 export default function Login() {
   const [email, setEmail] = useState("joe@rpd.com");
   const [password, setPassword] = useState("SecretP@ssword123");
-  const { isLoading, login } = useLogin();
+  const { login } = useLogin();
 
   function handleLogin(e) {
     e.preventDefault();
@@ -12,6 +12,8 @@ export default function Login() {
 
     login({ email, password });
   }
+
+  const isLoading = "";
 
   return (
     <main className="logInForm">

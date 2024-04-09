@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 import road from "../assets/road-3.png";
-import { useUser } from "../features/authentication/useUser";
 import { useLogout } from "../features/authentication/useLogout";
+import { useQuery } from "@tanstack/react-query";
+import { getCurrentUser } from "../services/apiAuth";
 
 function Header() {
-  const userData = useUser();
-  const { logOut, isLoading } = useLogout();
-  console.log(userData);
+  const { logOut } = useLogout();
+  const { data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: getCurrentUser,
+  });
 
+  console.log(user);
   return (
     <header>
       <div className="logo">
@@ -15,7 +19,10 @@ function Header() {
         <img src={road} alt="road" className="" width="40px" />
       </div>
       <span className="headerNav">
-        {userData.user ? (
+        <Link className="link" to="/">
+          Home
+        </Link>
+        {user ? (
           <>
             <Link className="link" to="/admin">
               Admin
@@ -26,13 +33,9 @@ function Header() {
           </>
         ) : (
           <Link className="link" to="/login">
-            Log In
+            <button>Log In</button>
           </Link>
         )}
-
-        <Link className="link" to="/">
-          Home
-        </Link>
       </span>
     </header>
   );
