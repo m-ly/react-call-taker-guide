@@ -11,7 +11,6 @@ function Header() {
     queryFn: getCurrentUser,
   });
 
-  console.log(user);
   return (
     <header>
       <div className="logo">
