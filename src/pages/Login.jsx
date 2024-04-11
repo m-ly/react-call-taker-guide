@@ -16,33 +16,29 @@ export default function Login() {
   const isLoading = "";
 
   return (
-    <main className="logInForm">
-      <form className="" onSubmit={handleLogin}>
-        <div className="">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            disabled={isLoading}
-          />
-        </div>
+    <main className="loginPage">
+      <h1>Log In</h1>
 
-        <div className="">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            disabled={isLoading}
-          />
-        </div>
+      <form className="userForm" onSubmit={handleLogin}>
+        <label htmlFor="email">Email address</label>
+        <input
+          type="email"
+          id="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          disabled={isLoading}
+        />
 
-        <div>
-          <button type="primary">Log In</button>
-        </div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          disabled={isLoading}
+        />
+
+        <button type="primary">Log In</button>
       </form>
     </main>
   );

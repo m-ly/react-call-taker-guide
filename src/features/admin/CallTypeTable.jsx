@@ -1,7 +1,10 @@
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { getCallTypes } from "../../services/apiCallTypes";
 
+import SearchForm from "../sidebar/SearchForm";
 import CallType from "./CallType";
+import { useState } from "react";
+import { useAppContext } from "../../context/AppContext";
 
 function CallTypeTable({
   showKeywords,
@@ -11,7 +14,8 @@ function CallTypeTable({
   setActiveCallType,
 }) {
   const queryClient = useQueryClient();
-
+  const [searchValue, setSearchValue] = useState("");
+  const { filteredCallTypes } = useAppContext();
   const {
     isLoading,
     data: callTypes,
@@ -21,36 +25,54 @@ function CallTypeTable({
     queryFn: getCallTypes,
   });
 
+  const filterTypeBySearch = !searchValue
+    ? callTypes
+    : callTypes.filter((callType) => {
+        return callType.name
+          .toLowerCase()
+          .includes(searchValue.toLowerCase().trim());
+      });
+
+  const currentCallTypes =
+    filteredCallTypes.length > 0
+      ? filteredCallTypes
+      : searchValue
+      ? filterTypeBySearch
+      : callTypes;
+
   if (isLoading) return <h1>Loading</h1>;
   if (error) return <h1>error</h1>;
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Call Type</th>
+    <div>
+      <SearchForm searchValue={searchValue} setSearchValue={setSearchValue} />
+      <table>
+        <thead>
+          <tr>
+            <th>Call Type</th>
 
-          <th colSpan={2}>Show Details</th>
-          <th colSpan={2}>Available Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {callTypes.map((callType) => {
-          return (
-            <CallType
-              key={`type-${callType.id}`}
-              callType={callType}
-              queryClient={queryClient}
-              showQuestions={showQuestions}
-              setShowQuestions={setShowQuestions}
-              showKeywords={showKeywords}
-              setShowKeywords={setShowKeywords}
-              setActiveCallType={setActiveCallType}
-            />
-          );
-        })}
-      </tbody>
-    </table>
+            <th colSpan={2}>Show Details</th>
+            <th colSpan={2}>Available Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentCallTypes.map((callType) => {
+            return (
+              <CallType
+                key={`type-${callType.id}`}
+                callType={callType}
+                queryClient={queryClient}
+                showQuestions={showQuestions}
+                setShowQuestions={setShowQuestions}
+                showKeywords={showKeywords}
+                setShowKeywords={setShowKeywords}
+                setActiveCallType={setActiveCallType}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

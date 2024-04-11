@@ -1,7 +1,7 @@
-import { getCallTypes } from "../services/apiCallTypes";
+import { getCallTypes } from "../../services/apiCallTypes";
 import { useQuery } from "@tanstack/react-query";
 
-import SideBar from "./SideBar";
+import SideBar from "../sidebar/SideBar";
 import Container from "./Container";
 import CallGuideForm from "./CallGuideForm";
 import Header from "./Header";

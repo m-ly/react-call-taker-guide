@@ -1,10 +1,8 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import { getCallTypes } from "../services/apiCallTypes";
+import { createContext, useContext, useReducer } from "react";
 
 const AppContext = createContext();
 const initialState = {
   questions: [],
-  status: "loading",
   callTypes: {},
   filteredCallTypes: [],
   activeCallType: "",
@@ -14,10 +12,8 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case "loading":
-      return { ...state, status: "loading" };
     case "dataReceived":
-      return { ...state, callTypes: action.payload, status: "ready" };
+      return { ...state, callTypes: action.payload };
     case "dataFailed":
       return { ...state, status: "error" };
     case "filterTypes":
@@ -35,19 +31,14 @@ function reducer(state = initialState, action) {
 
 function AppProvider({ children }) {
   const [
-    {
-      questions,
-      status,
-      callTypes,
-      filteredCallTypes,
-      activeCallType,
-      currentForm,
-    },
+    { questions, callTypes, filteredCallTypes, activeCallType, currentForm },
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const handleFilterCallTypes = (callArray) =>
-    dispatch({ type: "filterTypes", payload: callArray });
+  // const handleFilterCallTypes = (callArray) =>
+  //   dispatch({ type: "filterTypes", payload: callArray });
+  const handleFilterCallTypes = (callObject) =>
+    dispatch({ type: "filterTypes", payload: callObject });
 
   const handleSetActiveCallType = (callType) => {
     dispatch({ type: "setActiveCallType", payload: callType });
@@ -65,7 +56,6 @@ function AppProvider({ children }) {
     <AppContext.Provider
       value={{
         questions,
-        status,
         callTypes,
         activeCallType,
         filteredCallTypes,
@@ -84,7 +74,7 @@ function AppProvider({ children }) {
 function useAppContext() {
   const context = useContext(AppContext);
   if (context === undefined)
-    throw new Error("QuestionsProvider was used outside of App Provider");
+    throw new Error("AppContextProvider was used outside of App Provider");
   return context;
 }
 

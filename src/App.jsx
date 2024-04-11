@@ -4,12 +4,13 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-import AppLayout from "./components/AppLayout.jsx";
+import AppLayout from "./features/app/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Admin from "./pages/Admin.jsx";
-import { Toaster } from "react-hot-toast";
-import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+
+import ProtectedRoutes from "./features/components/ProtectedRoutes.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -46,11 +46,7 @@ function AuthProvider({ children }) {
     initialState
   );
 
-  function login(email, password) {
-    if (email === USER.email && password === USER.password)
-      dispatch({ type: "login", payload: USER });
-    else dispatch({ type: "reject", payload: "Invalid Credentials" });
-  }
+  function login() {}
 
   function logout() {
     dispatch({ type: "logout" });

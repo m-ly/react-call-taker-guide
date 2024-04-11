@@ -7,21 +7,26 @@ export default function QuestionList({
   showEditForm,
   setCurrentQuestion,
 }) {
-  return activeCallType.questions.map((element) => {
-    return (
-      <li
-        key={element.id}
-        style={{ display: "inline-block", marginRight: "10px" }}
-      >
-        <Question
-          setCurrentQuestion={setCurrentQuestion}
-          setShowQuestions={setShowQuestions}
-          setShowEditForm={setShowEditForm}
-          showQuestions={showQuestions}
-          showEditForm={showEditForm}
-          element={element}
-        />
-      </li>
-    );
-  });
+  return (
+    <div>
+      <h1>Questions</h1>
+
+      <div className="AdminContentContainer">
+        {activeCallType.questions.map((element) => {
+          return (
+            <Question
+              key={`${element.name}-${element.id}`}
+              setCurrentQuestion={setCurrentQuestion}
+              setShowQuestions={setShowQuestions}
+              setShowEditForm={setShowEditForm}
+              showQuestions={showQuestions}
+              showEditForm={showEditForm}
+              element={element}
+              className="Question"
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
 }

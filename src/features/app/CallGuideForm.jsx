@@ -1,5 +1,5 @@
-import { useAppContext } from "../context/AppContext";
-import { findMatchingCallTypes } from "../utils/helpers";
+import { useAppContext } from "../../context/AppContext";
+import { findMatchingCallTypes } from "../../utils/helpers";
 import toast from "react-hot-toast";
 
 import Question from "./Question";
@@ -11,6 +11,7 @@ function IntroductoryQuestions({ callTypes }) {
     const input = e.target.value;
 
     const filteredCallTypes = findMatchingCallTypes(callTypes, input);
+    console.log(filteredCallTypes);
     await handleFilterCallTypes(filteredCallTypes);
   }
 

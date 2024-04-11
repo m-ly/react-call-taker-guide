@@ -9,8 +9,9 @@ function Question({
   setCurrentQuestion,
 }) {
   return (
-    <div>
+    <li key={element.name}>
       {element.question}
+
       <button
         onClick={() => {
           setShowQuestions(!showQuestions);
@@ -20,16 +21,11 @@ function Question({
       >
         update
       </button>
-      <button
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <RedX style={{ height: "20px" }} />
+
+      <button onClick={() => console.log("deleting ", element)}>
+        <RedX height={20} width={20} className="RedX" />
       </button>
-    </div>
+    </li>
   );
 }
 

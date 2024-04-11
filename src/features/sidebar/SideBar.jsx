@@ -1,7 +1,7 @@
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import { useState } from "react";
 
-import SearchForm from "./sidebar/SearchForm";
+import SearchForm from "./SearchForm";
 
 function SideBar({ callTypes }) {
   const [searchValue, setSearchValue] = useState("");
@@ -13,31 +13,38 @@ function SideBar({ callTypes }) {
     handleSetForm("questionGuide");
   }
 
-  const allCallTypes = callTypes.map((callType) => callType.name);
-
   const filterTypeBySearch = !searchValue
-    ? allCallTypes
-    : allCallTypes.filter((callType) =>
-        callType.name.toLowerCase().includes(searchValue.toLowerCase().trim())
-      );
+    ? callTypes
+    : callTypes.filter((callType) => {
+        return callType.name
+          .toLowerCase()
+          .includes(searchValue.toLowerCase().trim());
+      });
 
   const currentCallTypes =
     filteredCallTypes.length > 0
       ? filteredCallTypes
       : searchValue
       ? filterTypeBySearch
-      : allCallTypes;
+      : callTypes;
 
   return (
     <div className="side-bar">
       <SearchForm searchValue={searchValue} setSearchValue={setSearchValue} />
       <ul>
         <h2 className="">Call Types</h2>
-        {currentCallTypes.map((type) => (
-          <li className="" key={type} onClick={() => handleClick(type)}>
-            {type}
-          </li>
-        ))}
+        {currentCallTypes.map((type) => {
+          console.log(type);
+          return (
+            <li
+              className=""
+              key={`${type.id}`}
+              onClick={() => handleClick(type)}
+            >
+              {type.name}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

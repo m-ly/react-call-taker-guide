@@ -73,3 +73,5 @@ export async function updateQuestion(questionObj) {
 
   if (error) console.error(error);
 }
+
+export async function addKeyWord() {}

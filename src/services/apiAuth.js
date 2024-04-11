@@ -29,3 +29,36 @@ export async function logOut() {
 
   if (error) toast.error(error.message);
 }
+
+export async function createUser({
+  email,
+  password,
+  firstName,
+  lastName,
+  isAdministrator = false,
+}) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        firstName,
+        lastName,
+        isAdministrator,
+      },
+    },
+  });
+
+  console.log(data);
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
+export async function getAllUsers() {
+  let { data: users, error } = await supabase.from("users").select("*");
+
+  if (error) throw new Error(error.message);
+
+  return users;
+}
