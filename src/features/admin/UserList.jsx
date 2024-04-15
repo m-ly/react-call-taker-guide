@@ -1,5 +1,6 @@
 import { getAllUsers } from "../../services/apiAuth";
 import { useState, useEffect } from "react";
+import SearchForm from "../sidebar/SearchForm";
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -18,9 +19,13 @@ function UserList() {
 
   return (
     <div className="userList">
-      {users.map((user) => {
-        return <p key={user.id}>{user.email}</p>;
-      })}
+      <h1>Users</h1>
+      <div>
+        <SearchForm />
+        {users.map((user) => {
+          return <p key={user.id}>{user.email}</p>;
+        })}
+      </div>
     </div>
   );
 }

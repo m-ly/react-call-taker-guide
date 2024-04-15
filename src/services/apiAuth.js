@@ -49,7 +49,6 @@ export async function createUser({
     },
   });
 
-  console.log(data);
   if (error) throw new Error(error.message);
 
   return data;

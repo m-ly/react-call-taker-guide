@@ -73,9 +73,9 @@ function CallGuideForm({ callTypes }) {
         <IntroductoryQuestions callTypes={callTypes} />
         {activeCallType && (
           <>
-            {currentTypeData.questions.map((question, index) => (
+            {activeCallType.questions.map((question, index) => (
               <Question
-                key={`${currentTypeData.name}-${index}`}
+                key={`${activeCallType.name}-${index}`}
                 question={question.question}
                 index={index}
               />

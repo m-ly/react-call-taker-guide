@@ -34,7 +34,6 @@ function SideBar({ callTypes }) {
       <ul>
         <h2 className="">Call Types</h2>
         {currentCallTypes.map((type) => {
-          console.log(type);
           return (
             <li
               className=""

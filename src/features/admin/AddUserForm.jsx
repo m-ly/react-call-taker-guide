@@ -2,21 +2,25 @@ import { useState } from "react";
 import { createUser } from "../../services/apiAuth";
 
 function AddUserForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [isAdministrator, setIsAdministrator] = useState(false);
+  const [userFormInfo, setUserFormInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    isAdministrator: false,
+  });
+
+  function handleChange(e) {
+    const { name, value, type, checked } = e.target;
+    setUserFormInfo((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  }
 
   async function handleSignUp(e) {
     e.preventDefault();
-    createUser({
-      email,
-      password,
-      firstName,
-      lastName,
-      isAdministrator,
-    });
+    createUser(userFormInfo);
   }
 
   return (
@@ -27,35 +31,40 @@ function AddUserForm() {
         <input
           id="userEmail"
           type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          name="email"
+          onChange={handleChange}
+          value={userFormInfo.email}
           disabled={""}
+          required
         />
 
         <label htmlFor="userPassword">Password</label>
         <input
           id="userPassword"
+          name="password"
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
+          onChange={handleChange}
+          value={userFormInfo.password}
           disabled={""}
         />
 
         <label htmlFor="firstName">First Name</label>
         <input
           id="firstName"
+          name="firstName"
           type="text"
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
+          onChange={handleChange}
+          value={userFormInfo.firstName}
           disabled={""}
         />
 
         <label htmlFor="lastName">Last Name</label>
         <input
           id="lastName"
+          name="lastName"
           type="text"
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
+          onChange={handleChange}
+          value={userFormInfo.lastName}
           disabled={""}
         />
 
@@ -63,19 +72,21 @@ function AddUserForm() {
           <label htmlFor="adminTrue">Administrative Status: </label>
           <input
             id="adminTrue"
+            name="isAdministrator"
             type="radio"
             value="true"
-            checked={isAdministrator === "true"}
-            onChange={() => setIsAdministrator("true")}
+            checked={userFormInfo.isAdministrator === "true"}
+            onChange={handleChange}
             required
           />
           <label htmlFor="adminTrue">True</label>
           <input
             id="adminFalse"
+            name="isAdministrator"
             type="radio"
             value="false"
-            checked={isAdministrator === "false"}
-            onChange={() => setIsAdministrator("false")}
+            checked={userFormInfo.isAdministrator === "false"}
+            onChange={handleChange}
             required
           />
           <label htmlFor="adminFalse">False</label>

@@ -29,13 +29,13 @@ export default function AddCallTypeForm({ setShowForm }) {
     try {
       const data = { name: callType, questions: questions, keywords: keywords };
       mutate(data);
-      //await createNewGuide(callType, questions, keywords);
-
       setShowForm(false);
     } catch {
       throw new Error("Replace me! This is a test error notification");
     }
   }
+
+  if (isLoading) return <h1>Loading</h1>;
 
   return (
     <div>

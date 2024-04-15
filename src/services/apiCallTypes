@@ -1,4 +1,3 @@
-import { useQueryClient } from "@tanstack/react-query";
 import supabase from "./supabase";
 
 export async function getCallTypes() {
@@ -51,15 +50,11 @@ export async function createNewGuide(callType) {
   const fkey = typeName ? typeName[0].id : null;
 
   for (const question of callType.questions) {
-    const { data, error } = await supabase
-      .from("questions")
-      .insert({ call_type_id: fkey, question });
+    await supabase.from("questions").insert({ call_type_id: fkey, question });
   }
 
   for (const keyword of callType.keywords) {
-    const { error } = await supabase
-      .from("keywords")
-      .insert({ call_type_id: fkey, keyword });
+    await supabase.from("keywords").insert({ call_type_id: fkey, keyword });
   }
 
   if (error) console.error(error);
