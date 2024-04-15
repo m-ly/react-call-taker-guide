@@ -44,3 +44,37 @@ To Run:
 #### Back End
 
 - Utilizes Supabase
+
+### TODO
+
+#### Non-Protected Routes
+
+- Implement a home page, and automatically send unauthenticated users to that page
+- Add an about page with ability for unauthenticated users to see
+
+#### General Usage
+
+- Protect the form route behind authentication
+
+#### users
+
+- Finish building users list and implement edit functionality
+
+#### Call Types
+
+- implement ability to view an individual call type by route
+
+#### Keywords
+
+- Implement method to edit keywords
+- Build and Style the keywords cards.
+
+#### Questions
+
+- When a question is updated, invalidate query of the question and update the list automatically.
+- Implement a function to delete and individual question. When this is complete, it should invalidate the query and update the list of questions automatically
+- Build and Style the questions
+
+#### Tests
+
+- Implement E2E testing for the project
