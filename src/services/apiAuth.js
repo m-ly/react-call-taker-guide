@@ -49,15 +49,27 @@ export async function createUser({
     },
   });
 
-  if (error) throw new Error(error.message);
+  error
+    ? toast.error(error.message)
+    : toast.success(
+        `Successfully Created a new user profile for ${firstName} ${lastName}.`
+      );
 
   return data;
 }
 
 export async function getAllUsers() {
-  let { data: users, error } = await supabase.from("users").select("*");
+  const { data: users, error } = await supabase.from("profiles").select("*");
 
   if (error) throw new Error(error.message);
 
   return users;
+}
+
+export async function deleteUser(id) {
+  const { data, error } = await supabase.from("profiles").delete().eq("id", id);
+
+  if (error) toast.error(error.message);
+
+  return data;
 }

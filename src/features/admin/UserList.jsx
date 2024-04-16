@@ -1,21 +1,15 @@
-import { getAllUsers } from "../../services/apiAuth";
-import { useState, useEffect } from "react";
+import supabase from "../../services/supabase";
+
 import SearchForm from "../sidebar/SearchForm";
+import { useUsers } from "../authentication/useUsers";
+import { deleteUser } from "../../services/apiAuth";
+import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 function UserList() {
-  const [users, setUsers] = useState([]);
+  const { isLoading, users } = useUsers();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getAllUsers();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching data:", error.message);
-      }
-    }
-    fetchData();
-  }, []);
+  if (isLoading) return <h1>Loading</h1>;
 
   return (
     <div className="userList">
@@ -51,15 +45,28 @@ function UserTable({ users }) {
 }
 
 function User({ user }) {
-  const { email } = user;
-  const { firstName, lastName, isAdministrator } = user.raw_user_meta_data;
+  const {
+    id,
+    email,
+    first_name: firstName,
+    last_name: lastName,
+    is_administrator: isAdministrator,
+  } = user;
+  const queryClient = useQueryClient();
 
   function handleDeleteUser() {
-    console.log("user Deleted!");
+    deleteUser(id);
+    toast.success(
+      `The record related to ${firstName} ${lastName} has been successfully removed.`
+    );
+    queryClient.invalidateQueries({ queryKey: ["users"] });
   }
 
-  function handleResetClick() {
+  async function handleResetClick(email) {
     console.log("Password Reset");
+    await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "http://localhost:5173/update-password",
+    });
   }
 
   return (
@@ -70,7 +77,7 @@ function User({ user }) {
       <td>{email}</td>
       <td>{isAdministrator}</td>
       <td>
-        <button onClick={handleResetClick}>Reset Password</button>
+        <button onClick={() => handleResetClick(email)}>Reset Password</button>
       </td>
       <td>
         <button onClick={handleDeleteUser}>X</button>

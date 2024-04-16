@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { createUser } from "../../services/apiAuth";
+import { useQueryClient } from "@tanstack/react-query";
 
 function AddUserForm() {
+  const queryClient = useQueryClient();
+
   const [userFormInfo, setUserFormInfo] = useState({
     firstName: "",
     lastName: "",
@@ -20,7 +23,20 @@ function AddUserForm() {
 
   async function handleSignUp(e) {
     e.preventDefault();
-    createUser(userFormInfo);
+
+    try {
+      await createUser(userFormInfo);
+      queryClient.invalidateQueries("users");
+      setUserFormInfo({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        isAdministrator: false,
+      });
+    } catch (err) {
+      throw new Error(err.message);
+    }
   }
 
   return (
@@ -73,23 +89,12 @@ function AddUserForm() {
           <input
             id="adminTrue"
             name="isAdministrator"
-            type="radio"
-            value="true"
-            checked={userFormInfo.isAdministrator === "true"}
+            type="checkbox"
+            value="false"
+            checked={userFormInfo.isAdministrator}
             onChange={handleChange}
-            required
           />
           <label htmlFor="adminTrue">True</label>
-          <input
-            id="adminFalse"
-            name="isAdministrator"
-            type="radio"
-            value="false"
-            checked={userFormInfo.isAdministrator === "false"}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="adminFalse">False</label>
         </div>
 
         <button type="submit">Submit</button>

@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import AppLayout from "./features/app/AppLayout.jsx";
 import Login from "./pages/Login.jsx";
 import Admin from "./pages/Admin.jsx";
+import PasswordReset from "./pages/PasswordReset.jsx";
 
 import ProtectedRoutes from "./features/components/ProtectedRoutes.jsx";
 
@@ -30,6 +31,7 @@ function App() {
             <Routes>
               <Route path="/" element={<AppLayout />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/update-password" element={<PasswordReset />} />
               <Route
                 path="/admin/*"
                 element={

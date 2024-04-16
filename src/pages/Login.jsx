@@ -3,7 +3,7 @@ import { useLogin } from "../features/authentication/useLogin";
 
 export default function Login() {
   const [email, setEmail] = useState("joe@rpd.com");
-  const [password, setPassword] = useState("SecretP@ssword123");
+  const [password, setPassword] = useState("StrongPassword1234!");
   const { login } = useLogin();
 
   function handleLogin(e) {
