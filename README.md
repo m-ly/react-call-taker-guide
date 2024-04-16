@@ -2,7 +2,7 @@
 
 ## Intro
 
-Historically, when a PSAP hires a new employee they come to the industry with no experience for the job. They have to be taught hundreds of codes to integrate with the Agency's CAD system, along with standard interrogation techniques. This is sometimes done in a classroom setting, but is often done 'on the fly' in real world scenario. GuardRails is a tool to help onboard new hires, and streamline the training process. It gives the agency control to configure and implement their own specific call type categorization, and standardizes the interrogation process to meet your agency's individual expectations.
+Historically, when a PSAP hires a new employee they come to the industry with very little experience. Even for those who are already established in the industry, they have to be taught hundreds of codes to integrate with the Agency's CAD system, along with standard interrogation techniques. This is sometimes done in a classroom setting, but is often done 'on the fly' in real world scenario. GuardRails is a tool to help onboard new hires, and streamline the training process. It gives the agency control to configure and implement their own specific call type categorization, and standardizes the interrogation process to meet your agency's individual expectations. It can be used in real-time, real world scenarios, or can be a helpful tool for your trainers to practice specific scenarios.
 
 ## V1.0
 
@@ -55,14 +55,18 @@ To Run:
 #### General Usage
 
 - Protect the form route behind authentication
+- implement a top x used call type option to present a user with the current most used forms.
 
 #### users
 
-- Finish building users list and implement edit functionality
+- Finish building users list and style the table
+- Implement functionality to delete a user
+- Implement functionality to reset a password
 
 #### Call Types
 
 - implement ability to view an individual call type by route
+- style cards for call type buttons
 
 #### Keywords
 
@@ -78,3 +82,7 @@ To Run:
 #### Tests
 
 - Implement E2E testing for the project
+
+## V2
+
+- Implement a function to track the words input to 'Tell me what happened question'. This counts the words that have been used on the answer to the question. If a individual word appears over `n` number of times it is automatically added to the keywords used by that form.

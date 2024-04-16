@@ -37,18 +37,13 @@ function IntroductoryQuestions({ callTypes }) {
 }
 
 function CallGuideForm({ callTypes }) {
-  //const { callTypes, activeCallType } = useAppContext();
   const { activeCallType } = useAppContext();
-  const currentTypeData = Object.values(callTypes).find(
-    (ele) => ele.name === activeCallType
-  );
 
   // concatenates all answers and copies to keyboard
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const data = new FormData(form);
+    const data = new FormData(e.target);
     const currentAnswers = [];
 
     for (let name of data.keys()) {
