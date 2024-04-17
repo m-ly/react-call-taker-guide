@@ -35,8 +35,6 @@ function AppProvider({ children }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  // const handleFilterCallTypes = (callArray) =>
-  //   dispatch({ type: "filterTypes", payload: callArray });
   const handleFilterCallTypes = (callObject) =>
     dispatch({ type: "filterTypes", payload: callObject });
 

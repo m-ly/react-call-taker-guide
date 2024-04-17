@@ -13,7 +13,6 @@ function CallTypeTable({
   setShowQuestions,
   setActiveCallType,
 }) {
-  const queryClient = useQueryClient();
   const [searchValue, setSearchValue] = useState("");
   const { filteredCallTypes } = useAppContext();
   const {
@@ -61,7 +60,6 @@ function CallTypeTable({
               <CallType
                 key={`type-${callType.id}`}
                 callType={callType}
-                queryClient={queryClient}
                 showQuestions={showQuestions}
                 setShowQuestions={setShowQuestions}
                 showKeywords={showKeywords}

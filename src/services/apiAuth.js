@@ -17,11 +17,16 @@ export async function getCurrentUser() {
 
   if (!session.session) return null;
 
-  const { data, error } = await supabase.auth.getUser();
+  const { data: auth } = await supabase.auth.getUser();
+
+  const { data: user, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", auth.user.id);
 
   if (error) toast.error(error.message);
 
-  return data.user;
+  return user[0];
 }
 
 export async function logOut() {

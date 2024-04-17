@@ -11,7 +11,7 @@ function IntroductoryQuestions({ callTypes }) {
     const input = e.target.value;
 
     const filteredCallTypes = findMatchingCallTypes(callTypes, input);
-    console.log(filteredCallTypes);
+
     await handleFilterCallTypes(filteredCallTypes);
   }
 

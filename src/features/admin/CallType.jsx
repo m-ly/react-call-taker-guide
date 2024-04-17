@@ -1,17 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import { deleteCallType } from "../../services/apiCallTypes";
 
 export default function CallType({
   callType,
-  queryClient,
   showKeywords,
   setShowKeywords,
   showQuestions,
   setShowQuestions,
   setActiveCallType,
 }) {
+  const queryClient = useQueryClient();
   const { name, id } = callType;
   const { isLoading: isDeleting, mutate } = useMutation({
     mutationFn: deleteCallType,

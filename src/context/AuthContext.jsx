@@ -1,12 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
 
-const USER = {
-  name: "joe@rpd.com",
-  email: "Secretp@assword123",
-  password: "qwerty",
-  isAdmin: true,
-};
-
 const AuthContext = createContext();
 const initialState = {
   user: null,

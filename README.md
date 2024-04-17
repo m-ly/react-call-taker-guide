@@ -71,13 +71,19 @@ To Run:
 #### Keywords
 
 - Implement method to edit keywords
+- ~~implement a method to delete keywords~~
 - Build and Style the keywords cards.
+- Refactor Keywords so that input is a textbox, and multiple words can be entered at once
 
 #### Questions
 
 - When a question is updated, invalidate query of the question and update the list automatically.
-- Implement a function to delete and individual question. When this is complete, it should invalidate the query and update the list of questions automatically
+- ~~Implement a function to delete and individual question.~~ When this is complete, it should invalidate the query and update the list of questions automatically
 - Build and Style the questions
+
+#### Loading Screen
+
+- Implement a stylized loader
 
 #### Tests
 

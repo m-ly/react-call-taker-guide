@@ -29,17 +29,13 @@ function App() {
         <AuthProvider>
           <Router>
             <Routes>
-              <Route path="/" element={<AppLayout />} />
+              <Route path="/" element={<h1>GuardRails</h1>} />
               <Route path="/login" element={<Login />} />
               <Route path="/update-password" element={<PasswordReset />} />
-              <Route
-                path="/admin/*"
-                element={
-                  <ProtectedRoutes>
-                    <Admin />
-                  </ProtectedRoutes>
-                }
-              />
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/app/*" element={<AppLayout />} />
+                <Route path="/admin/*" element={<Admin />} />
+              </Route>
             </Routes>
           </Router>
         </AuthProvider>

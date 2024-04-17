@@ -18,7 +18,7 @@ function Header() {
         <img src={road} alt="road" className="" />
       </div>
       <span className="headerNav">
-        <Link className="link" to="/">
+        <Link className="link" to="/app">
           Home
         </Link>
         {user ? (

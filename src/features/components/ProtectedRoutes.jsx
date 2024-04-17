@@ -1,21 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../authentication/useUser";
-import { useEffect } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-function ProtectedRoutes({ children }) {
-  const { user, isLoading } = useUser();
-  const navigate = useNavigate();
-
-  useEffect(
-    function () {
-      if (!user) navigate("/login");
-    },
-    [user, navigate]
-  );
-
-  if (isLoading) return <h1>Loading</h1>;
-
-  return children;
+export default function ProtectedRoutes() {
+  let auth = { token: true };
+  return auth.token ? <Outlet /> : <Navigate to="/login" />;
 }
-
-export default ProtectedRoutes;
