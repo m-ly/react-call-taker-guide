@@ -2,6 +2,8 @@ import { useState } from "react";
 import RedX from "../../assets/red-x-10333.svg?react";
 
 import KeywordsForm from "./KeywordForm";
+import supabase from "../../services/supabase";
+import toast from "react-hot-toast";
 
 export default function KeywordsList({ activeCallType }) {
   const [addKeywordForm, setAddKeywordForm] = useState(false);
@@ -10,6 +12,17 @@ export default function KeywordsList({ activeCallType }) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(activeCallType.id, keywords);
+  }
+
+  async function handleDeleteKeyword(element) {
+    const { error } = await supabase
+      .from("keywords")
+      .delete()
+      .eq("id", element.id);
+
+    error
+      ? toast.error(error.message)
+      : toast.success("Keyword Successfully Deleted!");
   }
 
   return (
@@ -21,7 +34,7 @@ export default function KeywordsList({ activeCallType }) {
             <span key={element.keyword} className="Keyword">
               {element.keyword}
               <button
-                onClick={() => console.log("Deleted ", element)}
+                onClick={() => handleDeleteKeyword(element)}
                 className="Redx"
               >
                 <RedX />
