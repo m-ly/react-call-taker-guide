@@ -2,20 +2,40 @@ import { useState } from "react";
 
 import { useUpdateQuestion } from "../../services/useUpdateQuestion";
 import { useAppContext } from "../../context/AppContext";
+import { useAdminContext } from "../../context/AdminContext.jsx";
 
 import CallTypeTable from "./CallTypeTable";
 import NewGuide from "./NewGuide";
 import QuestionList from "./QuestionList";
 import KeywordsList from "./KeywordsList";
 import EditForm from "./EditForm";
+import { AdminProvider } from "../../context/AdminContext.jsx";
 
 function CallTypePanel() {
-  const [showForm, setShowForm] = useState(false);
-  const [showKeywords, setShowKeywords] = useState(false);
-  const [showQuestions, setShowQuestions] = useState(false);
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [activeCallType, setActiveCallType] = useState(null);
-  const [currentQuestion, setCurrentQuestion] = useState({});
+  // const [showForm, setShowForm] = useState(false);
+  // const [showKeywords, setShowKeywords] = useState(false);
+  // const [showQuestions, setShowQuestions] = useState(false);
+  // const [showEditForm, setShowEditForm] = useState(false);
+  // const [activeCallType, setActiveCallType] = useState(null);
+  // const [currentQuestion, setCurrentQuestion] = useState({});
+
+  // const panelState = {
+
+  // };
+  const {
+    showForm,
+    setShowForm,
+    showKeywords,
+    setShowKeywords,
+    showEditForm,
+    setShowEditForm,
+    showQuestions,
+    setShowQuestions,
+    activeCallType,
+    setActiveCallType,
+    currentQuestion,
+    setCurrentQuestion,
+  } = useAdminContext();
 
   const { updateQuestion } = useUpdateQuestion();
   const { handleSetForm } = useAppContext();

@@ -1,4 +1,4 @@
-import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getCallTypes } from "../../services/apiCallTypes";
 
 import SearchForm from "../sidebar/SearchForm";

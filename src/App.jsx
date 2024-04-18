@@ -1,5 +1,6 @@
 import { AppProvider } from "./context/AppContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { AdminProvider } from "./context/AdminContext.jsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -34,7 +35,15 @@ function App() {
               <Route path="/update-password" element={<PasswordReset />} />
               <Route element={<ProtectedRoutes />}>
                 <Route path="/app/*" element={<AppLayout />} />
-                <Route path="/admin/*" element={<Admin />} />
+
+                <Route
+                  path="/admin/*"
+                  element={
+                    <AdminProvider>
+                      <Admin />
+                    </AdminProvider>
+                  }
+                />
               </Route>
             </Routes>
           </Router>
