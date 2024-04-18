@@ -6,13 +6,7 @@ import CallType from "./CallType";
 import { useState } from "react";
 import { useAppContext } from "../../context/AppContext";
 
-function CallTypeTable({
-  showKeywords,
-  setShowKeywords,
-  showQuestions,
-  setShowQuestions,
-  setActiveCallType,
-}) {
+function CallTypeTable() {
   const [searchValue, setSearchValue] = useState("");
   const { filteredCallTypes } = useAppContext();
   const {
@@ -56,17 +50,7 @@ function CallTypeTable({
         </thead>
         <tbody>
           {currentCallTypes.map((callType) => {
-            return (
-              <CallType
-                key={`type-${callType.id}`}
-                callType={callType}
-                showQuestions={showQuestions}
-                setShowQuestions={setShowQuestions}
-                showKeywords={showKeywords}
-                setShowKeywords={setShowKeywords}
-                setActiveCallType={setActiveCallType}
-              />
-            );
+            return <CallType key={`type-${callType.id}`} callType={callType} />;
           })}
         </tbody>
       </table>

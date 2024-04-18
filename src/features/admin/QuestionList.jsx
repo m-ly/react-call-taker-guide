@@ -1,12 +1,8 @@
+import { useAdminContext } from "../../context/AdminContext";
 import Question from "./Question";
-export default function QuestionList({
-  activeCallType,
-  setShowQuestions,
-  setShowEditForm,
-  showQuestions,
-  showEditForm,
-  setCurrentQuestion,
-}) {
+
+export default function QuestionList() {
+  const { activeCallType } = useAdminContext();
   return (
     <div>
       <h1>Questions</h1>
@@ -16,11 +12,6 @@ export default function QuestionList({
           return (
             <Question
               key={`${element.name}-${element.id}`}
-              setCurrentQuestion={setCurrentQuestion}
-              setShowQuestions={setShowQuestions}
-              setShowEditForm={setShowEditForm}
-              showQuestions={showQuestions}
-              showEditForm={showEditForm}
               element={element}
               className="Question"
             />

@@ -4,10 +4,12 @@ import RedX from "../../assets/red-x-10333.svg?react";
 import KeywordsForm from "./KeywordForm";
 import supabase from "../../services/supabase";
 import toast from "react-hot-toast";
+import { useAdminContext } from "../../context/AdminContext";
 
-export default function KeywordsList({ activeCallType }) {
+export default function KeywordsList() {
   const [addKeywordForm, setAddKeywordForm] = useState(false);
   const [keywords, setKeywords] = useState([]);
+  const { activeCallType } = useAdminContext();
 
   function handleSubmit(e) {
     e.preventDefault();

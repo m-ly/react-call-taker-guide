@@ -1,8 +1,8 @@
-export default function EditForm({
-  handleUpdateQuestion,
-  setCurrentQuestion,
-  currentQuestion,
-}) {
+import { useAdminContext } from "../../context/AdminContext";
+
+export default function EditForm({ handleUpdateQuestion }) {
+  const { currentQuestion, setCurrentQuestion } = useAdminContext();
+
   return (
     <form onSubmit={handleUpdateQuestion}>
       <input

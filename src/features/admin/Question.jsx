@@ -1,15 +1,12 @@
 import toast from "react-hot-toast";
 import RedX from "../../assets/red-x-10333.svg?react";
 import supabase from "../../services/supabase";
+import { useAdminContext } from "../../context/AdminContext";
 
-function Question({
-  element,
-  setShowQuestions,
-  showQuestions,
-  setShowEditForm,
-  showEditForm,
-  setCurrentQuestion,
-}) {
+function Question({ element }) {
+  const { setShowQuestions, setShowEditForm, setCurrentQuestion } =
+    useAdminContext();
+
   async function handleDeleteQuestion() {
     const { error } = await supabase
       .from("questions")
@@ -27,8 +24,8 @@ function Question({
 
       <button
         onClick={() => {
-          setShowQuestions(!showQuestions);
-          setShowEditForm(!showEditForm);
+          setShowQuestions();
+          setShowEditForm();
           setCurrentQuestion(element);
         }}
       >

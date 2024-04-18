@@ -2,16 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import { deleteCallType } from "../../services/apiCallTypes";
+import { useAdminContext } from "../../context/AdminContext";
 
-export default function CallType({
-  callType,
-  showKeywords,
-  setShowKeywords,
-  showQuestions,
-  setShowQuestions,
-  setActiveCallType,
-}) {
+export default function CallType({ callType }) {
   const queryClient = useQueryClient();
+  const { setShowQuestions, showKeywords, setShowKeywords, setActiveCallType } =
+    useAdminContext();
   const { name, id } = callType;
   const { isLoading: isDeleting, mutate } = useMutation({
     mutationFn: deleteCallType,
@@ -28,7 +24,7 @@ export default function CallType({
         <td>
           <button
             onClick={() => {
-              setShowQuestions(!showQuestions);
+              setShowQuestions();
               setActiveCallType(callType);
             }}
           >

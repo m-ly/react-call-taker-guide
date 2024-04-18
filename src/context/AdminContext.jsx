@@ -30,37 +30,39 @@ function reducer(state = initialState, action) {
 }
 
 function AdminProvider({ children }) {
-  const {
-    showForm,
-    showEditForm,
-    showKeywords,
-    showQuestions,
-    activeCallType,
-    currentQuestion,
-  } = useReducer(reducer, initialState);
+  const [
+    {
+      showForm,
+      showEditForm,
+      showKeywords,
+      showQuestions,
+      activeCallType,
+      currentQuestion,
+    },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
-  function setShowForm(showForm) {
-    reducer({ type: "handleShowForm", action: !showForm });
+  function setShowForm() {
+    dispatch({ type: "handleShowForm", payload: !showForm });
+  }
+  function setShowEditForm() {
+    dispatch({ type: "handleShowEditForm", payload: !showEditForm });
   }
 
-  function setShowKeywords(showKeywords) {
-    reducer({ type: "handleShowKeywords", action: !showKeywords });
+  function setShowKeywords() {
+    dispatch({ type: "handleShowKeywords", payload: !showKeywords });
   }
 
-  function setShowQuestions(showQuestions) {
-    reducer({ type: "handleShowQuestions", action: !showQuestions });
+  function setShowQuestions() {
+    dispatch({ type: "handleShowQuestions", payload: !showQuestions });
   }
 
   function setActiveCallType(callType) {
-    reducer({ type: "handleSetActiveCallType", action: callType });
+    dispatch({ type: "handleSetActiveCallType", payload: callType });
   }
 
   function setCurrentQuestion(currentQuestion) {
-    reducer({ type: "handleSetCurrentQuestion", action: currentQuestion });
-  }
-
-  function setShowEditForm(showEditForm) {
-    reducer({ type: "handleShowEditForm", action: !showEditForm });
+    dispatch({ type: "handleSetCurrentQuestion", payload: currentQuestion });
   }
 
   return (
