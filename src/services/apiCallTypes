@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import supabase from "./supabase";
 
 export async function getCallTypes() {
@@ -69,4 +70,47 @@ export async function updateQuestion(questionObj) {
   if (error) console.error(error);
 }
 
+export async function getQuestions(id) {
+  const { data, error } = await supabase
+    .from("questions")
+    .select(`*`)
+    .eq("call_type_id", id);
+
+  if (error) console.error(error);
+
+  return data;
+}
+
+export async function deleteQuestion(question) {
+  const { error } = await supabase
+    .from("questions")
+    .delete()
+    .eq("id", question.id);
+
+  error
+    ? toast.error(error.message)
+    : toast.success("Question Successfully Deleted!");
+}
+
+export async function getKeywords(id) {
+  const { data, error } = await supabase
+    .from("keywords")
+    .select(`*`)
+    .eq("call_type_id", id);
+
+  if (error) console.error(error);
+
+  return data;
+}
+
+export async function deleteKeyword(element) {
+  const { error } = await supabase
+    .from("keywords")
+    .delete()
+    .eq("id", element.id);
+
+  error
+    ? toast.error(error.message)
+    : toast.success("Keyword Successfully Deleted!");
+}
 export async function addKeyWord() {}

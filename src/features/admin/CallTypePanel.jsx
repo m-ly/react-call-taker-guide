@@ -1,4 +1,3 @@
-import { useUpdateQuestion } from "../../services/useUpdateQuestion";
 import { useAppContext } from "../../context/AppContext";
 import { useAdminContext } from "../../context/AdminContext.jsx";
 
@@ -7,6 +6,7 @@ import NewGuide from "./NewGuide";
 import QuestionList from "./QuestionList";
 import KeywordsList from "./KeywordsList";
 import EditForm from "./EditForm";
+import { useUpdateQuestion } from "../../hooks/useUpdateQuestion.js";
 
 function CallTypePanel() {
   const {

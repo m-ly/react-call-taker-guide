@@ -1,7 +1,7 @@
 import supabase from "../../services/supabase";
 
 import SearchForm from "../sidebar/SearchForm";
-import { useUsers } from "../authentication/useUsers";
+import { useUsers } from "../authenticationHooks/useUsers";
 import { deleteUser } from "../../services/apiAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";

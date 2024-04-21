@@ -346,3 +346,28 @@ td {
     }
   }
 }
+
+.logo-box {
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  height: 95vh;
+  background: linear-gradient(rgba(11, 46, 60, 0.95), rgba(146, 196, 218, 0.4));
+
+  margin: 15px;
+}
+
+.homepage-header {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+.header-logo-text {
+  height: 3.5rem;
+}
+.homepage-header {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}

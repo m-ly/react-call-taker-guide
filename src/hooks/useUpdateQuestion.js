@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { updateQuestion as updateQuestionApi } from "./apiCallTypes";
+import { updateQuestion as updateQuestionApi } from "../services/apiCallTypes";
 
 export function useUpdateQuestion() {
   const queryClient = useQueryClient();

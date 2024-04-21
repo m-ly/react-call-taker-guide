@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import road from "../../assets/road-3.png";
-import { useLogout } from "../authentication/useLogout";
+import { useLogout } from "../authenticationHooks/useLogout";
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentUser } from "../../services/apiAuth";
 

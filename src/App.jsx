@@ -13,6 +13,7 @@ import Admin from "./pages/Admin.jsx";
 import PasswordReset from "./pages/PasswordReset.jsx";
 
 import ProtectedRoutes from "./features/components/ProtectedRoutes.jsx";
+import HomePage from "./pages/HomePage.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,7 +31,7 @@ function App() {
         <AuthProvider>
           <Router>
             <Routes>
-              <Route path="/" element={<h1>GuardRails</h1>} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/update-password" element={<PasswordReset />} />
               <Route element={<ProtectedRoutes />}>

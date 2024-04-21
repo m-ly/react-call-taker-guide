@@ -3,11 +3,6 @@ import { useState } from "react";
 function Question({ question, index }) {
   const [answer, setAnswer] = useState("");
 
-  const handleBlur = () => {
-    // onBlur(index, answer);
-    return;
-  };
-
   return (
     <div>
       <label>
@@ -18,7 +13,6 @@ function Question({ question, index }) {
         value={answer}
         name={`q${index + 4}`}
         onChange={(e) => setAnswer(e.target.value)}
-        onBlur={handleBlur}
         className=""
       />
     </div>

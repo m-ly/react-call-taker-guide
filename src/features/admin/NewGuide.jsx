@@ -14,7 +14,7 @@ export default function AddCallTypeForm({ setShowForm }) {
   const [callType, setCallType] = useState("");
   const queryClient = useQueryClient();
 
-  const { isLoading, mutate } = useMutation({
+  const { isLoading, mutate: create } = useMutation({
     mutationFn: createNewGuide,
     onSuccess: () => {
       toast.success(`New call type ${callType} successfully added!`);
@@ -28,7 +28,7 @@ export default function AddCallTypeForm({ setShowForm }) {
 
     try {
       const data = { name: callType, questions: questions, keywords: keywords };
-      mutate(data);
+      create(data);
       setShowForm(false);
     } catch {
       throw new Error("Replace me! This is a test error notification");
