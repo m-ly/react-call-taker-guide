@@ -18,19 +18,19 @@ function IntroductoryQuestions({ callTypes }) {
   return (
     <>
       <div>
-        <label>1: What is the Address of the Emergency?</label>
+        <label htmlFor="q1">1: What is the Address of the Emergency?</label>
         <br></br>
-        <textarea name="q1" />
+        <textarea name="q1" id="q1" />
       </div>
       <div>
-        <label>2: What are you reporting?</label>
+        <label htmlFor="q2">2: What are you reporting?</label>
         <br></br>
-        <textarea name="q2" onChange={(e) => handleTypeChange(e)} />
+        <textarea name="q2" id="q2" onChange={(e) => handleTypeChange(e)} />
       </div>
       <div>
-        <label>3: When did this happen?</label>
+        <label htmlFor="q3">3: When did this happen?</label>
         <br></br>
-        <textarea name="q3" />
+        <textarea name="q3" id="q3" />
       </div>
     </>
   );
@@ -64,7 +64,7 @@ function CallGuideForm({ callTypes }) {
     <div>
       <h3>Questions</h3>
 
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form id="callGuide" onSubmit={(e) => handleSubmit(e)}>
         <IntroductoryQuestions callTypes={callTypes} />
         {activeCallType && (
           <>

@@ -1,14 +1,26 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import toast from "react-hot-toast";
 
 import { deleteCallType } from "../../services/apiCallTypes";
 import { useAdminContext } from "../../context/AdminContext";
+import QuestionList from "./QuestionList";
+import { useState } from "react";
+import CallDetailForm from "./CallDetailForm";
+import KeywordsList from "./KeywordsList";
 
-export default function CallType({ callType }) {
+export default function CallType({ callType, shadeOpen }) {
   const queryClient = useQueryClient();
-  const { setShowQuestions, showKeywords, setShowKeywords, setActiveCallType } =
-    useAdminContext();
-  const { name, id } = callType;
+  const [adminList, setAdminList] = useState(false);
+  const {
+    setShowQuestions,
+    showQuestions,
+    showKeywords,
+    setShowKeywords,
+    setActiveCallType,
+  } = useAdminContext();
+  const { id } = callType;
+
   const { isLoading: isDeleting, mutate } = useMutation({
     mutationFn: deleteCallType,
     onSuccess: () => {
@@ -17,42 +29,41 @@ export default function CallType({ callType }) {
     },
     onError: (err) => toast.error(err.message),
   });
-  return (
-    <>
-      <tr key={id}>
-        <td>{name}</td>
-        <td>
-          <button
-            onClick={() => {
-              setShowQuestions();
-              setActiveCallType(callType);
-            }}
-          >
-            Show Questions
-          </button>
-        </td>
-        <td>
-          <button
-            onClick={() => {
-              setShowKeywords(!showKeywords);
-              setActiveCallType(callType);
-            }}
-          >
-            Show Keywords
-          </button>
-        </td>
-        <td className="deleteCell">
-          <button onClick={() => mutate(id)} disabled={isDeleting}>
-            delete
-          </button>
-        </td>
-      </tr>
 
-      {/* <Modal
-        showModal={showQuestions}
-        title="Questions"
-        data={callType.questions}
-      /> */}
-    </>
-  );
+  {
+    return !adminList ? (
+      <span>
+        <button
+          onClick={() => {
+            setAdminList(!adminList);
+            setActiveCallType(callType);
+            setShowQuestions(!setShowQuestions);
+          }}
+        >
+          Show Questions
+        </button>
+
+        <button
+          onClick={() => {
+            setAdminList(!adminList);
+
+            setActiveCallType(callType);
+            setShowKeywords(!showKeywords);
+          }}
+        >
+          Show Keywords
+        </button>
+
+        <button onClick={() => mutate(id)} disabled={isDeleting}>
+          delete
+        </button>
+        <button>{shadeOpen ? "-" : "+"}</button>
+      </span>
+    ) : (
+      <CallDetailForm>
+        {showQuestions && <QuestionList />}
+        {showKeywords && <KeywordsList />}
+      </CallDetailForm>
+    );
+  }
 }

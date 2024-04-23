@@ -7,27 +7,29 @@ function Question({ element, onDelete }) {
     useAdminContext();
 
   return (
-    <li key={element.name}>
-      {element.question}
+    <ul>
+      <li key={element.name}>
+        {element.question}
 
-      <button
-        onClick={() => {
-          setShowQuestions();
-          setShowEditForm();
-          setCurrentQuestion(element);
-        }}
-      >
-        update
-      </button>
+        <button
+          onClick={() => {
+            setShowQuestions();
+            setShowEditForm();
+            setCurrentQuestion(element);
+          }}
+        >
+          update
+        </button>
 
-      <button
-        onClick={() => {
-          onDelete(element);
-        }}
-      >
-        <RedX height={20} width={20} className="RedX" />
-      </button>
-    </li>
+        <button
+          onClick={() => {
+            onDelete(element);
+          }}
+        >
+          <RedX height={20} width={20} className="RedX" />
+        </button>
+      </li>
+    </ul>
   );
 }
 

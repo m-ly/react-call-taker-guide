@@ -3,11 +3,19 @@ import { getCallTypes } from "../../services/apiCallTypes";
 
 import SearchForm from "../sidebar/SearchForm";
 import CallType from "./CallType";
+import Spinner from "../components/Spinner";
 import { useState } from "react";
 import { useAppContext } from "../../context/AppContext";
 
+import QuestionList from "./QuestionList";
+import KeywordsList from "./KeywordsList";
+import { useAdminContext } from "../../context/AdminContext";
+
 function CallTypeTable() {
+  const [shadeOpen, setShadeOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [activeCallType, setActiveCallType] = useState(null);
+  const { showKeywords, showQuestions } = useAdminContext();
   const { filteredCallTypes } = useAppContext();
   const {
     isLoading,
@@ -33,27 +41,42 @@ function CallTypeTable() {
       ? filterTypeBySearch
       : callTypes;
 
-  if (isLoading) return <h1>Loading</h1>;
+  if (isLoading) return <Spinner />;
   if (error) return <h1>error</h1>;
 
   return (
     <div>
       <SearchForm searchValue={searchValue} setSearchValue={setSearchValue} />
-      <table>
-        <thead>
-          <tr>
-            <th>Call Type</th>
 
-            <th colSpan={2}>Show Details</th>
-            <th colSpan={2}>Available Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="callType-table">
+        <h1>Call Type</h1>
+        <ul>
           {currentCallTypes.map((callType) => {
-            return <CallType key={`type-${callType.id}`} callType={callType} />;
+            return (
+              <div key={callType.id}>
+                <li
+                  className="callType-row"
+                  onClick={() => {
+                    setActiveCallType(callType);
+                    setShadeOpen(!shadeOpen);
+                  }}
+                >
+                  {callType.name}
+                  <button>
+                    {shadeOpen && activeCallType.name === callType.name
+                      ? "-"
+                      : "+"}
+                  </button>
+                </li>
+
+                {shadeOpen && activeCallType.name === callType.name && (
+                  <CallType callType={callType} />
+                )}
+              </div>
+            );
           })}
-        </tbody>
-      </table>
+        </ul>
+      </div>
     </div>
   );
 }

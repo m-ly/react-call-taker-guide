@@ -2,6 +2,7 @@ function SearchForm({ searchValue, setSearchValue }) {
   return (
     <form className="">
       <input
+        name="searchForm"
         type="text"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}

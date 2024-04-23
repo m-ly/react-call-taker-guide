@@ -48,6 +48,7 @@ function AddUserForm() {
           id="userEmail"
           type="email"
           name="email"
+          autoComplete="off"
           onChange={handleChange}
           value={userFormInfo.email}
           disabled={""}
@@ -59,6 +60,7 @@ function AddUserForm() {
           id="userPassword"
           name="password"
           type="password"
+          autoComplete="off"
           onChange={handleChange}
           value={userFormInfo.password}
           disabled={""}
@@ -69,6 +71,7 @@ function AddUserForm() {
           id="firstName"
           name="firstName"
           type="text"
+          autoComplete="off"
           onChange={handleChange}
           value={userFormInfo.firstName}
           disabled={""}
@@ -79,6 +82,7 @@ function AddUserForm() {
           id="lastName"
           name="lastName"
           type="text"
+          autoComplete="off"
           onChange={handleChange}
           value={userFormInfo.lastName}
           disabled={""}
@@ -91,6 +95,7 @@ function AddUserForm() {
             name="isAdministrator"
             type="checkbox"
             value="false"
+            autoComplete="off"
             checked={userFormInfo.isAdministrator}
             onChange={handleChange}
           />

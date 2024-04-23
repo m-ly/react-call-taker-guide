@@ -1,12 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getQuestions } from "../services/apiCallTypes";
 
-export default function useQuestions(id, condition) {
+export default function useQuestions(callTypeId) {
+  const queryClient = useQueryClient();
+
   const { data: questions, isLoading } = useQuery({
-    queryKey: ["questions", id],
-    queryFn: () => getQuestions(id),
-    enabled: !!condition,
+    queryKey: ["questions", callTypeId],
+    queryFn: () => getQuestions(callTypeId),
+    staleTime: Infinity,
   });
 
-  return { questions, isLoading };
+  const refetchQuestions = () => {
+    queryClient.invalidateQueries(["questions", callTypeId]);
+  };
+
+  return { questions, isLoading, refetchQuestions };
 }

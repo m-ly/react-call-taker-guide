@@ -5,11 +5,12 @@ import { useUsers } from "../authenticationHooks/useUsers";
 import { deleteUser } from "../../services/apiAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
 
 function UserList() {
   const { isLoading, users } = useUsers();
 
-  if (isLoading) return <h1>Loading</h1>;
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="userList">

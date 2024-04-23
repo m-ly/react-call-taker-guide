@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import RedX from "../../assets/red-x-10333.svg?react";
 
 import KeywordsForm from "./KeywordForm";
 import { useAdminContext } from "../../context/AdminContext";
 
-import { getKeywords } from "../../services/apiCallTypes";
+import useAddKeywords from "../../hooks/useAddKeywords";
+import useKeywords from "../../hooks/useKeywords";
 import useDeleteKeyword from "../../hooks/useDeleteKeyword";
 
 export default function KeywordsList() {
@@ -13,47 +13,39 @@ export default function KeywordsList() {
   const [keywords, setKeywords] = useState([]);
   const { activeCallType } = useAdminContext();
 
-  function useKeywords(callTypeId) {
-    const queryClient = useQueryClient();
-
-    const { data: keywordsList, isLoading } = useQuery({
-      queryKey: ["keywords", callTypeId],
-      queryFn: () => getKeywords(callTypeId),
-      staleTime: Infinity,
-    });
-
-    const refetchKeywords = () => {
-      queryClient.invalidateQueries(["keywords", callTypeId]);
-    };
-
-    return { keywordsList, isLoading, refetchKeywords };
-  }
-
   const { keywordsList, isLoading } = useKeywords(activeCallType.id);
   const { deleteKeyword, isLoading: isDeletingKeyword } = useDeleteKeyword();
+  const { addKeyWords } = useAddKeywords();
+
+  const splitKeywords = keywords
+    .map((element) => {
+      return element.match(/\s|,|;|:/) ? element.split(/\s|;|,|:/) : element;
+    })
+    .flat()
+    .filter((ele) => ele.length > 1);
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(activeCallType.id, keywords);
+    addKeyWords({ id: activeCallType.id, keywords: splitKeywords });
   }
 
   if (isLoading || isDeletingKeyword) return <h1>Loading</h1>;
 
   return (
-    <div className="">
+    <div>
       <h1>Keywords</h1>
-      <div className="AdminContentContainer">
-        {keywordsList.map((element) => {
-          return (
-            <span key={element.keyword} className="Keyword">
-              {element.keyword}
-              <button onClick={() => deleteKeyword(element)} className="Redx">
-                <RedX />
-              </button>
-            </span>
-          );
-        })}
-      </div>
+
+      {keywordsList.map((element) => {
+        return (
+          <span key={element.id} className="Keyword">
+            {element.keyword}
+            <button onClick={() => deleteKeyword(element)} className="Redx">
+              <RedX />
+            </button>
+          </span>
+        );
+      })}
+
       {!addKeywordForm ? (
         <button onClick={() => setAddKeywordForm(!addKeywordForm)}>
           Add a new Keyword
@@ -63,6 +55,7 @@ export default function KeywordsList() {
           handleSubmit={handleSubmit}
           keywords={keywords}
           setKeywords={setKeywords}
+          callTypeId={activeCallType.id}
         />
       )}
     </div>

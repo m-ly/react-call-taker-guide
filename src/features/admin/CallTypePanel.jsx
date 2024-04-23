@@ -1,12 +1,10 @@
 import { useAppContext } from "../../context/AppContext";
 import { useAdminContext } from "../../context/AdminContext.jsx";
 
+import { useUpdateQuestion } from "../../hooks/useUpdateQuestion.js";
 import CallTypeTable from "./CallTypeTable";
 import NewGuide from "./NewGuide";
-import QuestionList from "./QuestionList";
-import KeywordsList from "./KeywordsList";
 import EditForm from "./EditForm";
-import { useUpdateQuestion } from "../../hooks/useUpdateQuestion.js";
 
 function CallTypePanel() {
   const {
@@ -45,9 +43,6 @@ function CallTypePanel() {
         </button>
       )}
       {showForm && <NewGuide setShowForm={setShowForm} />}
-      {showQuestions && <QuestionList />}
-
-      {showKeywords && <KeywordsList />}
       {showEditForm && <EditForm handleUpdateQuestion={handleUpdateQuestion} />}
     </div>
   );
