@@ -49,12 +49,12 @@ function AdminProvider({ children }) {
     dispatch({ type: "handleShowEditForm", payload: !showEditForm });
   }
 
-  function setShowKeywords() {
-    dispatch({ type: "handleShowKeywords", payload: !showKeywords });
+  function setShowKeywords(shown = !showKeywords) {
+    dispatch({ type: "handleShowKeywords", payload: shown });
   }
 
-  function setShowQuestions() {
-    dispatch({ type: "handleShowQuestions", payload: !showQuestions });
+  function setShowQuestions(shown = !showQuestions) {
+    dispatch({ type: "handleShowQuestions", payload: shown });
   }
 
   function setActiveCallType(callType) {

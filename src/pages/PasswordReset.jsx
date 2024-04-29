@@ -1,11 +1,15 @@
 import { useState } from "react";
+import supabase from "../services/supabase";
+import { redirect } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function PasswordReset() {
   const [password, setPassword] = useState("");
   const [passwordVerify, setPassWordVerify] = useState("");
 
   function handleReset() {
-    console.log("Resetting password");
+    if (!ValidPassword()) return;
+    resetPassword();
   }
 
   function ValidPassword() {
@@ -13,6 +17,14 @@ export default function PasswordReset() {
     if (password !== passwordVerify) return false;
 
     return true;
+  }
+
+  async function resetPassword() {
+    const { error } = await supabase.auth.updateUser({ password: password });
+
+    if (error) toast.error(error.message);
+
+    redirect("/app");
   }
 
   return (

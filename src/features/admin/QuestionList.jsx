@@ -4,8 +4,8 @@ import Question from "./Question";
 import useQuestions from "../../hooks/useQuestions";
 import Spinner from "../components/Spinner";
 
-export default function QuestionList() {
-  const { activeCallType } = useAdminContext();
+export default function QuestionList({ onToggle }) {
+  const { activeCallType, setShowQuestions } = useAdminContext();
   const { deleteQuestion, isLoading: isDeleting } = useDeleteQuestion();
   const { questions, isLoading: questionsLoading } = useQuestions(
     activeCallType.id
@@ -15,18 +15,29 @@ export default function QuestionList() {
 
   return (
     <div>
-      <h1>Questions</h1>
+      <span>
+        <button
+          onClick={() => {
+            console.log("should be toggling");
+            setShowQuestions();
+          }}
+        >
+          Hide
+        </button>
+      </span>
 
-      {questions.map((element) => {
-        return (
-          <Question
-            key={`${element.name}-${element.id}`}
-            element={element}
-            className="Question"
-            onDelete={deleteQuestion}
-          />
-        );
-      })}
+      <div className="details-container">
+        {questions.map((element) => {
+          return (
+            <Question
+              key={`${element.name}-${element.id}`}
+              element={element}
+              className="Question"
+              onDelete={deleteQuestion}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

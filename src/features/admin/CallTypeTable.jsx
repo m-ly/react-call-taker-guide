@@ -6,16 +6,15 @@ import CallType from "./CallType";
 import Spinner from "../components/Spinner";
 import { useState } from "react";
 import { useAppContext } from "../../context/AppContext";
-
-import QuestionList from "./QuestionList";
-import KeywordsList from "./KeywordsList";
 import { useAdminContext } from "../../context/AdminContext";
+import Plus from "../../assets/plus-circle.svg?react";
+import Minus from "../../assets/minus-circle.svg?react";
 
 function CallTypeTable() {
+  const { setShowKeywords, setShowQuestions } = useAdminContext();
   const [shadeOpen, setShadeOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [activeCallType, setActiveCallType] = useState(null);
-  const { showKeywords, showQuestions } = useAdminContext();
   const { filteredCallTypes } = useAppContext();
   const {
     isLoading,
@@ -59,14 +58,18 @@ function CallTypeTable() {
                   onClick={() => {
                     setActiveCallType(callType);
                     setShadeOpen(!shadeOpen);
+                    setShowQuestions(false);
+                    setShowKeywords(false);
                   }}
                 >
                   {callType.name}
-                  <button>
-                    {shadeOpen && activeCallType.name === callType.name
-                      ? "-"
-                      : "+"}
-                  </button>
+                  <div className="shade-button">
+                    {shadeOpen && activeCallType.name === callType.name ? (
+                      <Minus className="expand-carat" />
+                    ) : (
+                      <Plus className="expand-carat" />
+                    )}
+                  </div>
                 </li>
 
                 {shadeOpen && activeCallType.name === callType.name && (
