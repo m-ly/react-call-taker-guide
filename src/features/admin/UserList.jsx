@@ -64,9 +64,8 @@ function User({ user }) {
   }
 
   async function handleResetClick(email) {
-    console.log("Password Reset");
     await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "http://localhost:5173/update-password",
+      redirectTo: `http://${window.location.origin}/update-password`,
     });
   }
 
