@@ -7,8 +7,9 @@ import KeywordsList from "./KeywordsList";
 import { deleteCallType as deleteCallTypeApi } from "../../services/apiCallTypes";
 import { useAdminContext } from "../../context/AdminContext";
 import trash from "../../assets/trash.png";
+import Minus from "../../assets/minus-circle.svg?react";
 
-export default function CallType({ callType, shadeOpen }) {
+export default function CallType({ callType }) {
   const queryClient = useQueryClient();
   const [adminList, setAdminList] = useState(false);
   const {
@@ -35,30 +36,47 @@ export default function CallType({ callType, shadeOpen }) {
     return (
       <div className="callType-row">
         <div
+          className="callType-header"
           onClick={() => {
             setAdminList(!adminList);
             setActiveCallType(callType);
             setShowQuestions();
           }}
         >
-          Questions
-          {showQuestions && <QuestionList onToggle={setShowQuestions} />}
+          {showQuestions ? (
+            <span>
+              Questions <Minus className="expand-carat" />
+            </span>
+          ) : (
+            "Questions..."
+          )}
+          {showQuestions && <QuestionList />}
         </div>
 
         <div
+          className="callType-header"
           onClick={() => {
             setAdminList(!adminList);
             setActiveCallType(callType);
             setShowKeywords();
           }}
         >
-          Keywords
-          {showKeywords && <KeywordsList setShowKeywords={setShowKeywords} />}
+          {showKeywords ? (
+            <span>
+              Keywords <Minus className="expand-carat" />
+            </span>
+          ) : (
+            "Keywords..."
+          )}
+          {showKeywords && <KeywordsList />}
         </div>
 
-        <div onClick={() => deleteCallType(id)} disabled={isDeleting}>
-          <img src={trash} style={{ width: 10 }} />
-        </div>
+        <img
+          src={trash}
+          className="delete"
+          onClick={() => deleteCallType(id)}
+          disabled={isDeleting}
+        />
       </div>
     );
   }

@@ -99,7 +99,6 @@ function AddUserForm() {
             checked={userFormInfo.isAdministrator}
             onChange={handleChange}
           />
-          <label htmlFor="adminTrue">True</label>
         </div>
 
         <button type="submit">Submit</button>

@@ -1,6 +1,6 @@
 function SearchForm({ searchValue, setSearchValue }) {
   return (
-    <form className="">
+    <form className="searchform-large">
       <input
         name="searchForm"
         type="text"

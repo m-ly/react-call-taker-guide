@@ -11,7 +11,7 @@ import useKeywords from "../../hooks/useKeywords";
 import useDeleteKeyword from "../../hooks/useDeleteKeyword";
 import Spinner from "../components/Spinner";
 
-export default function KeywordsList({ setShowKeywords }) {
+export default function KeywordsList() {
   const [addKeywordForm, setAddKeywordForm] = useState(false);
   const [keywords, setKeywords] = useState([]);
   const { activeCallType } = useAdminContext();
@@ -37,10 +37,6 @@ export default function KeywordsList({ setShowKeywords }) {
 
   return (
     <div>
-      <span>
-        <Plus className="expand-carat" />
-        <button onClick={() => setShowKeywords(false)}>Hide</button>
-      </span>
       <div className="details-container">
         {keywordsList.map((element) => {
           return (

@@ -77,6 +77,8 @@ header {
   grid-column: span 4;
 }
 
+/* NavBar */
+
 .logo {
   display: flex;
   flex-direction: row;
@@ -143,6 +145,8 @@ td {
   background-color: #1f2937;
   color: var(--color-brand--1);
 }
+
+/* Admin  */
 
 .AdminContainer {
   margin: 20px;
@@ -231,9 +235,7 @@ td {
 
   width: 12px;
   height: 12px;
-  margin-left: 5px;
-  align-items: center;
-  justify-content: center;
+  float: right;
 }
 
 .AdminPanelNav {
@@ -260,91 +262,6 @@ td {
   background-color: #f0f0f0;
   color: #ffb545;
   font-weight: bold;
-}
-
-.modalContainer {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba($color: #000000, $alpha: 0.35);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .modal {
-    width: 50vw;
-    height: auto;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 20px;
-
-    background-color: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-
-    &_header {
-      position: relative;
-      border-bottom: 1px solid #dddddd;
-      &-title {
-        text-align: center;
-      }
-
-      .close {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: transparent;
-
-        img {
-          width: 1rem;
-          height: auto;
-          transition: all 0.3s;
-        }
-        &:hover {
-          img {
-            transform: scale(1.1);
-          }
-        }
-      }
-    }
-
-    &_content {
-      border-bottom: 1px solid #dddddd;
-      padding: 2rem 0;
-    }
-
-    &_footer {
-      padding: 2rem 0;
-      padding-bottom: 0;
-
-      button {
-        float: right;
-        padding: 0.5rem;
-
-        border-radius: 8px;
-      }
-      .modal-close {
-        background-color: transparent;
-        font-weight: 600;
-
-        &:hover {
-          color: rgba(54, 67, 72, 0.8);
-        }
-      }
-      .submit {
-        margin-right: 1rem;
-        background-color: #364348;
-        color: #fff;
-
-        &:hover {
-          background-color: rgba(54, 67, 72, 0.8);
-        }
-      }
-    }
-  }
 }
 
 .logo-box {
@@ -393,6 +310,9 @@ td {
     transform: rotate(1turn);
   }
 }
+
+/* CallTypes */
+
 .callType-table {
   width: 100%;
   table-layout: fixed;
@@ -404,6 +324,7 @@ td {
   border: 2px solid lightgray;
   padding: 10px;
   margin: -2px;
+  position: relative;
 }
 
 .callType-row ul {
@@ -415,16 +336,59 @@ td {
   background-color: none;
 }
 
+.callType-header {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.callType-header:hover {
+  color: var(--color-brand--1);
+  font-weight: bold;
+  transition: all 500ms;
+  cursor: pointer;
+}
+
+.delete {
+  width: 15px;
+  position: absolute;
+  right: 13px;
+  bottom: 5px;
+}
+
+.delete:hover {
+  width: 16px;
+  transition: all 200ms;
+  cursor: pointer;
+}
+
 .shade-button {
   float: right;
 }
 
 .details-container {
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: 200;
+  color: black;
+}
+
+.questions {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .expand-carat {
   width: 20px;
   transition: opacity 0.5s ease-in-out;
+}
+
+.searchform-large {
+  width: 80%;
+  padding: 15px;
+}
+
+/* AddUserForm */
+
+.adminBox {
+  display: flex;
 }
