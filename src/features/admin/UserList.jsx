@@ -65,10 +65,11 @@ function User({ user }) {
 
   async function handleResetClick(email) {
     await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `http://${window.location.origin}/update-password`,
+      redirectTo: `${window.location.origin}/update-password`,
     });
   }
 
+  console.log(`${window.location.origin}/update-password`);
   return (
     <tr>
       <td>
