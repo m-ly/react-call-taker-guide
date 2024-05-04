@@ -40,12 +40,12 @@ export default function KeywordsList() {
       <div className="details-container">
         {keywordsList.map((element) => {
           return (
-            <span key={element.id} className="Keyword">
+            <div key={element.id} className="keyword">
               {element.keyword}
-              <button onClick={() => deleteKeyword(element)} className="Redx">
+              <div onClick={() => deleteKeyword(element)} className="Redx">
                 <RedX />
-              </button>
-            </span>
+              </div>
+            </div>
           );
         })}
       </div>

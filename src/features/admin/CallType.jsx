@@ -30,11 +30,9 @@ export default function CallType({ callType }) {
     onError: (err) => toast.error(err.message),
   });
 
-  console.log("show questions:", showQuestions, "show keywords:", showKeywords);
-
   {
     return (
-      <div className="callType-row">
+      <div className="callType-lists">
         <div
           className="callType-header"
           onClick={() => {

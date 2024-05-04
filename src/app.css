@@ -179,16 +179,18 @@ td {
   align-items: flex-start;
 }
 
-.Keyword {
-  display: flex;
+.keyword {
+  display: inline-flex;
   flex-direction: row;
   border-radius: 6px;
   margin: 20px;
-  padding: 3px;
+  padding: 8px;
   font-size: 15px;
   background-color: #549fff;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 20rem;
+  opacity: 95%;
 }
 
 .loginPage {
@@ -232,10 +234,19 @@ td {
 
 .Redx {
   display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
 
-  width: 12px;
-  height: 12px;
-  float: right;
+.Redx:hover {
+  width: 30px;
+  height: 30px;
+}
+
+.Edit:hover {
+  width: 30px;
+  height: 30px;
 }
 
 .AdminPanelNav {
@@ -320,11 +331,20 @@ td {
   margin-top: 20px;
 }
 
+.callType-row h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
 .callType-row {
   border: 2px solid lightgray;
   padding: 10px;
   margin: -2px;
   position: relative;
+}
+
+.callType-lists {
+  padding-left: 15px;
 }
 
 .callType-row ul {
@@ -363,6 +383,9 @@ td {
 
 .shade-button {
   float: right;
+  position: absolute;
+  right: 13px;
+  top: 18px;
 }
 
 .details-container {
@@ -391,4 +414,23 @@ td {
 
 .adminBox {
   display: flex;
+}
+
+/* Question */
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  padding: 10px;
+}
+
+.question ol {
+  type: number;
+}
+
+.question-options {
+  display: flex;
+  justify-content: space-between;
+  width: 10%;
 }

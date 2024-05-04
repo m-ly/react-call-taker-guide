@@ -9,7 +9,6 @@ function IntroductoryQuestions({ callTypes }) {
 
   async function handleTypeChange(e) {
     const input = e.target.value;
-
     const filteredCallTypes = findMatchingCallTypes(callTypes, input);
 
     await handleFilterCallTypes(filteredCallTypes);
@@ -56,7 +55,7 @@ function CallGuideForm({ callTypes }) {
       await navigator.clipboard.writeText(combinedAnswers);
       toast.success("Successfully Copied to Clipboard!");
     } catch (error) {
-      console.error("Clipboard copy failed:", error);
+      toast.error("Clipboard copy failed. Try again");
     }
   };
 

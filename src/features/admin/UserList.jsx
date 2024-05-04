@@ -69,7 +69,6 @@ function User({ user }) {
     });
   }
 
-  console.log(`${window.location.origin}/update-password`);
   return (
     <tr>
       <td>

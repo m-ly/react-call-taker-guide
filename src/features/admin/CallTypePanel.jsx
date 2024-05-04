@@ -39,7 +39,7 @@ function CallTypePanel() {
             handleSetForm("questionGuide");
           }}
         >
-          New Guide
+          Create New Guide
         </button>
       )}
       {showForm && <NewGuide setShowForm={setShowForm} />}

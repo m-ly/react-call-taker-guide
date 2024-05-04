@@ -53,16 +53,18 @@ function CallTypeTable() {
           {currentCallTypes.map((callType) => {
             return (
               <div key={callType.id}>
-                <li
-                  className="callType-row"
-                  onClick={() => {
-                    setActiveCallType(callType);
-                    setShadeOpen(!shadeOpen);
-                    setShowQuestions(false);
-                    setShowKeywords(false);
-                  }}
-                >
-                  {callType.name}
+                <li className="callType-row">
+                  <h1
+                    onClick={() => {
+                      setActiveCallType(callType);
+                      setShadeOpen(!shadeOpen);
+                      setShowQuestions(false);
+                      setShowKeywords(false);
+                    }}
+                  >
+                    {callType.name}
+                  </h1>
+
                   <div className="shade-button">
                     {shadeOpen && activeCallType.name === callType.name ? (
                       <Minus className="expand-carat" />
@@ -70,11 +72,11 @@ function CallTypeTable() {
                       <Plus className="expand-carat" />
                     )}
                   </div>
-                </li>
 
-                {shadeOpen && activeCallType.name === callType.name && (
-                  <CallType callType={callType} />
-                )}
+                  {shadeOpen && activeCallType.name === callType.name && (
+                    <CallType callType={callType} />
+                  )}
+                </li>
               </div>
             );
           })}
