@@ -70,7 +70,6 @@ To Run:
 
 #### Keywords
 
-- Implement method to edit keywords
 - ~~implement a method to delete keywords~~
 - Build and Style the keywords cards.
 - Refactor Keywords so that input is a textbox, and multiple words can be entered at once
