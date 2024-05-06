@@ -54,7 +54,7 @@ function CallTypeTable() {
             return (
               <div key={callType.id}>
                 <li className="callType-row">
-                  <h1
+                  <div
                     onClick={() => {
                       setActiveCallType(callType);
                       setShadeOpen(!shadeOpen);
@@ -62,15 +62,15 @@ function CallTypeTable() {
                       setShowKeywords(false);
                     }}
                   >
-                    {callType.name}
-                  </h1>
+                    <h1>{callType.name}</h1>
 
-                  <div className="shade-button">
-                    {shadeOpen && activeCallType.name === callType.name ? (
-                      <Minus className="expand-carat" />
-                    ) : (
-                      <Plus className="expand-carat" />
-                    )}
+                    <div className="shade-button">
+                      {shadeOpen && activeCallType.name === callType.name ? (
+                        <Minus className="expand-carat" />
+                      ) : (
+                        <Plus className="expand-carat" />
+                      )}
+                    </div>
                   </div>
 
                   {shadeOpen && activeCallType.name === callType.name && (

@@ -410,10 +410,27 @@ td {
   padding: 15px;
 }
 
+.searchForm {
+  width: 90%;
+  padding: 15px;
+}
+
 /* AddUserForm */
 
 .adminBox {
   display: flex;
+  flex-direction: row;
+  height: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminBox label {
+  width: 80%;
+}
+
+.userForm {
+  width: 70%;
 }
 
 /* Question */

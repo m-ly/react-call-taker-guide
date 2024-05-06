@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Header from "../features/app/Header";
 import UsersPanel from "../features/admin/UsersPanel";
-import AddUserForm from "../features/admin/AddUserForm";
+import AddUserForm from "../features/admin/NewUserForm";
 import UserList from "../features/admin/UserList";
 import CallTypePanel from "../features/admin/CallTypePanel";
 import AdminNavBar from "../features/admin/AdminNavBar";

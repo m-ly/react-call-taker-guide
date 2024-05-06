@@ -89,7 +89,8 @@ function AddUserForm() {
         />
 
         <div className="adminBox">
-          <label htmlFor="adminTrue">Administrative Status: </label>
+          <label htmlFor="adminTrue">Check box to create an admin user: </label>
+
           <input
             id="adminTrue"
             name="isAdministrator"
