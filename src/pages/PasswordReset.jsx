@@ -24,7 +24,8 @@ export default function PasswordReset() {
 
     if (error) toast.error(error.message);
 
-    redirect("/app");
+    toast.success("Password successfully updated!");
+    return redirect("/app");
   }
 
   return (
