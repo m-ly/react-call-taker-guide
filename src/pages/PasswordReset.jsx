@@ -1,11 +1,12 @@
 import { useState } from "react";
 import supabase from "../services/supabase";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export default function PasswordReset() {
   const [password, setPassword] = useState("");
   const [passwordVerify, setPassWordVerify] = useState("");
+  const navigate = useNavigate();
 
   function handleReset() {
     if (!ValidPassword()) return;
@@ -25,7 +26,8 @@ export default function PasswordReset() {
     if (error) toast.error(error.message);
 
     toast.success("Password successfully updated!");
-    return redirect("/app");
+
+    navigate("/app");
   }
 
   return (
