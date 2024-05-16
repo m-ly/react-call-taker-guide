@@ -26,9 +26,9 @@ function Header() {
             <Link className="link" to="/admin">
               Admin
             </Link>
-            <button className="link" onClick={logOut}>
+            <Link className="link" onClick={logOut}>
               Logout
-            </button>
+            </Link>
           </>
         ) : (
           <Link className="link" to="/login">

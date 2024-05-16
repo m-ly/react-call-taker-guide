@@ -5,8 +5,12 @@ import SearchForm from "./SearchForm";
 
 function SideBar({ callTypes }) {
   const [searchValue, setSearchValue] = useState("");
-  const { filteredCallTypes, handleSetActiveCallType, handleSetForm } =
-    useAppContext();
+  const {
+    filteredCallTypes,
+    activeCallType,
+    handleSetActiveCallType,
+    handleSetForm,
+  } = useAppContext();
 
   function handleClick(type) {
     handleSetActiveCallType(type);
@@ -36,7 +40,7 @@ function SideBar({ callTypes }) {
         {currentCallTypes.map((type) => {
           return (
             <li
-              className=""
+              className={type === activeCallType ? "active" : ""}
               key={`${type.id}`}
               onClick={() => handleClick(type)}
             >

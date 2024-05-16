@@ -48,9 +48,8 @@ export default function CallType({ callType }) {
           ) : (
             "Questions..."
           )}
-          {showQuestions && <QuestionList />}
         </div>
-
+        {showQuestions && <QuestionList />}
         <div
           className="callType-header"
           onClick={() => {
@@ -66,8 +65,8 @@ export default function CallType({ callType }) {
           ) : (
             "Keywords..."
           )}
-          {showKeywords && <KeywordsList />}
         </div>
+        {showKeywords && <KeywordsList />}
 
         <img
           src={trash}

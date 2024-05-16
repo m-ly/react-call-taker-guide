@@ -34,9 +34,9 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/update-password" element={<PasswordReset />} />
+
               <Route element={<ProtectedRoutes />}>
                 <Route path="/app/*" element={<AppLayout />} />
-
                 <Route
                   path="/admin/*"
                   element={

@@ -61,7 +61,7 @@ To Run:
 
 - Finish building users list and style the table
 - Implement functionality to delete a user
-- Implement functionality to reset a password
+- ~~Implement functionality to reset a password~~
 
 #### Call Types
 
@@ -79,11 +79,11 @@ To Run:
 - When a question is updated, invalidate query of the question and update the list automatically.
 - ~~Implement a function to delete and individual question.~~ When this is complete, it should invalidate the query and update the list of questions automatically
 - Build and Style the questions
-- Fix bug that causes updating questions to reindex. An update should maintain the same index
+- ~~Fix bug that causes updating questions to reindex. An update should maintain the same index~~
 
 #### Loading Screen
 
-- Implement a stylized loader
+- ~~Implement a stylized loader~~
 
 #### Tests
 

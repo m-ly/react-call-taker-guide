@@ -42,7 +42,7 @@ export default function PasswordReset() {
           : ""}
       </div>
 
-      <form onSubmit={handleReset}>
+      <form onSubmit={handleReset} className="userForm">
         <label htmlFor="password">New Password</label>
         <br></br>
         <input

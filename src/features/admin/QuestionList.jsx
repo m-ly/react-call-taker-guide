@@ -3,8 +3,7 @@ import { useAdminContext } from "../../context/AdminContext";
 import Question from "./Question";
 import useQuestions from "../../hooks/useQuestions";
 import Spinner from "../components/Spinner";
-import Plus from "../../assets/plus-circle.svg?react";
-import Minus from "../../assets/minus-circle.svg?react";
+import { useState } from "react";
 
 export default function QuestionList() {
   const { activeCallType } = useAdminContext();
@@ -12,21 +11,34 @@ export default function QuestionList() {
   const { questions, isLoading: questionsLoading } = useQuestions(
     activeCallType.id
   );
+  const [showQuestionForm, setShowQuestionForm] = useState(false);
 
   if (questionsLoading || isDeleting) return <Spinner />;
 
   return (
-    <ol className="details-container questions">
-      {questions.map((element) => {
-        return (
-          <Question
-            key={`${element.name}-${element.id}`}
-            element={element}
-            className="Question"
-            onDelete={deleteQuestion}
-          />
-        );
-      })}
-    </ol>
+    <div>
+      <ol className="details-container questions">
+        {questions.map((element) => {
+          return (
+            <Question
+              key={`${element.name}-${element.id}`}
+              element={element}
+              className="Question"
+              onDelete={deleteQuestion}
+            />
+          );
+        })}
+      </ol>
+
+      {showQuestionForm && <input type="text"></input>}
+
+      <button
+        onClick={() => {
+          setShowQuestionForm(true);
+        }}
+      >
+        Add A New Question
+      </button>
+    </div>
   );
 }

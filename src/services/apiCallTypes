@@ -74,7 +74,8 @@ export async function getQuestions(id) {
   const { data, error } = await supabase
     .from("questions")
     .select(`*`)
-    .eq("call_type_id", id);
+    .eq("call_type_id", id)
+    .order("id", { ascending: true });
 
   if (error) console.error(error);
 
