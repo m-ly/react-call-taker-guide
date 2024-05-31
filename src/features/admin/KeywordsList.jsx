@@ -1,7 +1,5 @@
 import { useState } from "react";
 import RedX from "../../assets/red-x-10333.svg?react";
-import Plus from "../../assets/plus-circle.svg?react";
-import Minus from "../../assets/minus-circle.svg?react";
 
 import KeywordsForm from "./KeywordForm";
 import { useAdminContext } from "../../context/AdminContext";
