@@ -55,12 +55,16 @@ function User({ user }) {
   } = user;
   const queryClient = useQueryClient();
 
-  function handleDeleteUser() {
-    deleteUser(id);
-    toast.success(
-      `The record related to ${firstName} ${lastName} has been successfully removed.`
-    );
-    queryClient.invalidateQueries({ queryKey: ["users"] });
+  async function handleDeleteUser() {
+    try {
+      await deleteUser(id);
+      toast.success(
+        `The record related to ${firstName} ${lastName} has been successfully removed.`
+      );
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    } catch (err) {
+      toast.error(err);
+    }
   }
 
   async function handleResetClick(email) {

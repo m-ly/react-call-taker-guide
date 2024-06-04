@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteQuestion } from "../services/apiCallTypes";
+import { deleteUser as authDelete } from "../services/apiAuth";
 
 export default function useDeleteUser() {
   const queryClient = useQueryClient();
 
   const { mutate: deleteUser, isLoading } = useMutation({
-    mutationFn: (questionId) => deleteQuestion(questionId),
+    mutationFn: (userId) => authDelete(userId) {
     onSuccess: () => {
-      queryClient.invalidateQueries("callType");
+      queryClient.invalidateQueries("users");
     },
   });
 

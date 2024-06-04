@@ -23,7 +23,6 @@ function AddUserForm() {
 
   async function handleSignUp(e) {
     e.preventDefault();
-
     try {
       await createUser(userFormInfo);
       queryClient.invalidateQueries("users");
