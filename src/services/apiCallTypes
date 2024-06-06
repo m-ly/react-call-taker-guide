@@ -114,6 +114,19 @@ export async function deleteKeyword(element) {
     ? toast.error(error.message)
     : toast.success("Keyword Successfully Deleted!");
 }
+
+export async function addKeyWord(callTypeId, keyword) {
+  const { error } = await supabase
+    .from("keywords")
+    .insert({ call_type_id: callTypeId, keyword });
+
+  if (error) {
+    toast.error("An error occurred while adding keywords.");
+  }
+
+  toast.success("The list of keywords has been updated!");
+}
+
 export async function addKeyWords(callTypeId, keywords) {
   for (const keyword of keywords) {
     const { error } = await supabase

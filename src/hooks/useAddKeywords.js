@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addKeyWords as addKeyWordsApi } from "../services/apiCallTypes";
+import { addKeyWord as addKeyWordApi } from "../services/apiCallTypes";
 
 export default function useAddKeywords() {
   const queryClient = useQueryClient();
 
-  const { mutate: addKeyWords, isLoading } = useMutation({
+  const { mutate: addKeyWord, isLoading } = useMutation({
     mutationFn: ({ id, keywords }) => {
-      addKeyWordsApi(id, keywords);
+      return addKeyWordApi(id, keywords);
     },
     onSuccess: () => {
       queryClient.invalidateQueries("keywords");
     },
   });
 
-  return { addKeyWords, isLoading };
+  return { addKeyWord, isLoading };
 }
