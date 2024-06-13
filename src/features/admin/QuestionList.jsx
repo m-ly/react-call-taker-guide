@@ -4,6 +4,7 @@ import Question from "./Question";
 import useQuestions from "../../hooks/useQuestions";
 import Spinner from "../components/Spinner";
 import { useState } from "react";
+import QuestionsForm from "./QuestionsForm";
 
 export default function QuestionList() {
   const { activeCallType } = useAdminContext();
@@ -13,6 +14,7 @@ export default function QuestionList() {
   );
   const [showQuestionForm, setShowQuestionForm] = useState(false);
 
+  console.log(questions);
   if (questionsLoading || isDeleting) return <Spinner />;
 
   return (
@@ -30,15 +32,17 @@ export default function QuestionList() {
         })}
       </ol>
 
-      {showQuestionForm && <input type="text"></input>}
-
-      <button
-        onClick={() => {
-          setShowQuestionForm(true);
-        }}
-      >
-        Add A New Question
-      </button>
+      {!showQuestionForm ? (
+        <button onClick={() => setShowQuestionForm(!showQuestionForm)}>
+          Add a new Question
+        </button>
+      ) : (
+        <QuestionsForm
+          questions={questions}
+          setQuestions={questions}
+          callTypeId={activeCallType.id}
+        />
+      )}
     </div>
   );
 }

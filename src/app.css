@@ -457,4 +457,9 @@ td {
   display: flex;
   justify-content: space-between;
   width: 10%;
+  margin: -5px;
+}
+
+.questinn-options div {
+  border: solid red 1px;
 }

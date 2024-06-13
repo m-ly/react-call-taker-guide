@@ -49,6 +49,7 @@ export async function createNewGuide(callType) {
     .select();
 
   const fkey = typeName ? typeName[0].id : null;
+  console.log(fkey);
 
   for (const question of callType.questions) {
     await supabase.from("questions").insert({ call_type_id: fkey, question });
@@ -116,6 +117,7 @@ export async function deleteKeyword(element) {
 }
 
 export async function addKeyWord(callTypeId, keyword) {
+  console.log(callTypeId, keyword);
   const { error } = await supabase
     .from("keywords")
     .insert({ call_type_id: callTypeId, keyword });

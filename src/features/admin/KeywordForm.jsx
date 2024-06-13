@@ -1,34 +1,21 @@
 import { useState } from "react";
 import useAddKeyword from "../../hooks/useAddKeywords";
 
-export default function KeywordsForm({ setKeywords, callTypeId }) {
+function KeywordsForm({ keywords, setKeywords, callTypeId }) {
   const [keyword, setKeyword] = useState("");
   const { addKeyWord } = useAddKeyword();
 
   function handleAddKeyword(e) {
     e.preventDefault();
-    console.log("adding keyword:", keyword);
-    addKeyWord({ id: callTypeId, keywords: keyword });
-    // setKeywords((prevKeywords) => [...prevKeywords, keyword]);
-    setKeyword("");
-  }
+    callTypeId
+      ? addKeyWord({ callTypeId, keyword })
+      : setKeywords([...keywords, keyword]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    // const splitKeywords = keywords
-    //   .map((element) => {
-    //     return element.match(/\s|,|;|:/) ? element.split(/\s|;|,|:/) : element;
-    //   })
-    //   .flat()
-    //   .filter((ele) => ele.length > 1);
-
-    addKeyWord({ id: callTypeId, keywords: keyword });
     setKeyword("");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <input
         type="textarea"
         id="keyword"
@@ -45,13 +32,8 @@ export default function KeywordsForm({ setKeywords, callTypeId }) {
           +
         </button>
       )}
-      <br />
-      <button
-        style={{ padding: "4px", margin: "5px", width: "200px" }}
-        type="submit"
-      >
-        Submit
-      </button>
     </form>
   );
 }
+
+export default KeywordsForm;

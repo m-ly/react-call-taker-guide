@@ -29,6 +29,7 @@ export default function AddCallTypeForm({ setShowForm }) {
     try {
       const data = { name: callType, questions: questions, keywords: keywords };
       create(data);
+      console.log(data);
       setShowForm(false);
     } catch {
       throw new Error("Replace me! This is a test error notification");
@@ -61,6 +62,7 @@ export default function AddCallTypeForm({ setShowForm }) {
           handleSubmit={handleSubmit}
         />
       )}
+
       <div>
         <h3>Questions for Call Type: {callType}</h3>
 
@@ -83,6 +85,14 @@ export default function AddCallTypeForm({ setShowForm }) {
           </>
         )}
       </div>
+      <br />
+      <button
+        style={{ padding: "4px", margin: "5px", width: "200px" }}
+        type="submit"
+        onClick={handleSubmit}
+      >
+        Submit
+      </button>
     </div>
   );
 }
